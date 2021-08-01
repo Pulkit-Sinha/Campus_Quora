@@ -1,13 +1,11 @@
 import 'package:flutter/material.dart';
 
 class LogInPage extends StatelessWidget {
-  const LogInPage({Key key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Center(
-        child: Padding(
+      body: Container(
           padding: const EdgeInsets.all(12.0),
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
@@ -24,11 +22,13 @@ class LogInPage extends StatelessWidget {
                   labelText: 'Password',
                 ),
               ),
-              Text('Don\'t have an account? Sign up here.')
+              SizedBox(
+                height: 10,
+              ),
+              Text('Don\'t have an account? Sign up here.',)
             ],
           ),
         ),
-      ),
-    );
+      );
   }
 }
