@@ -22,9 +22,10 @@ class LogInPage extends StatelessWidget {
               ),
             ),
             SizedBox(
-              height: 10,
+              height: 20,
             ),
-            
+            ElevatedButton(onPressed: (){}, child: Text('Login')),
+            SizedBox(height: 50,),
             ElevatedButton(
                 onPressed: () {
                   Navigator.pushNamed(context, '/makeAccount');
