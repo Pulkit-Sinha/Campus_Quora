@@ -2,10 +2,10 @@ import 'package:flutter/material.dart';
 import 'data/profile.dart';
 
 class UserProfilePage extends StatelessWidget {
-
   @override
   Widget build(BuildContext context) {
-    double heightOfScreen = MediaQuery.of(context).size.height; // to get the height of device.
+    double heightOfScreen =
+        MediaQuery.of(context).size.height; // to get the height of device.
     UserProfile user = UserProfile(
         name: 'N.A.',
         instagramId: 'N.A.',
@@ -34,11 +34,12 @@ class UserProfilePage extends StatelessWidget {
                 child: CircleAvatar(
                   backgroundImage:
                       AssetImage('assets/images/${user.profilePic}'),
-                  radius: heightOfScreen/15, // now remaining height is height - 100
+                  radius: heightOfScreen /
+                      15, // now remaining height is height - 100
                 ),
               ),
               SizedBox(
-                height: heightOfScreen/50, 
+                height: heightOfScreen / 50,
               ),
               Container(
                 child: Column(
@@ -46,9 +47,7 @@ class UserProfilePage extends StatelessWidget {
                   children: [
                     Container(
                       child: ElevatedButton(
-                        
                           style: ElevatedButton.styleFrom(
-                              
                               primary: Colors.grey[800]),
                           onPressed: () {},
                           child: Text(
@@ -63,7 +62,7 @@ class UserProfilePage extends StatelessWidget {
                       color: Colors.grey[800],
                     ),
                     Container(
-                      height: heightOfScreen*(4/7),
+                      height: heightOfScreen * (0.5),
                       child: SingleChildScrollView(
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
@@ -74,7 +73,7 @@ class UserProfilePage extends StatelessWidget {
                                   color: Colors.grey, letterSpacing: 2.0),
                             ),
                             SizedBox(
-                              height: heightOfScreen/50,
+                              height: heightOfScreen / 50,
                             ),
                             Text(
                               user.name,
@@ -84,14 +83,14 @@ class UserProfilePage extends StatelessWidget {
                                 fontSize: 28,
                               ),
                             ),
-                            SizedBox(height: heightOfScreen/50),
+                            SizedBox(height: heightOfScreen / 50),
                             Text(
                               'Graduation Year',
                               style: TextStyle(
                                   color: Colors.grey, letterSpacing: 2.0),
                             ),
                             SizedBox(
-                              height: heightOfScreen/50,
+                              height: heightOfScreen / 50,
                             ),
                             Text(
                               '${user.graduationYear}',
@@ -102,7 +101,7 @@ class UserProfilePage extends StatelessWidget {
                               ),
                             ),
                             SizedBox(
-                              height: heightOfScreen/50,
+                              height: heightOfScreen / 50,
                             ),
                             Text(
                               'Degree',
@@ -110,7 +109,7 @@ class UserProfilePage extends StatelessWidget {
                                   color: Colors.grey, letterSpacing: 2.0),
                             ),
                             SizedBox(
-                              height: heightOfScreen/50,
+                              height: heightOfScreen / 50,
                             ),
                             Text(
                               '${user.degreeIn}',
@@ -121,7 +120,7 @@ class UserProfilePage extends StatelessWidget {
                               ),
                             ),
                             SizedBox(
-                              height: heightOfScreen/50,
+                              height: heightOfScreen / 50,
                             ),
                             Text(
                               'Hostel',
@@ -129,7 +128,7 @@ class UserProfilePage extends StatelessWidget {
                                   color: Colors.grey, letterSpacing: 2.0),
                             ),
                             SizedBox(
-                              height: heightOfScreen/50,
+                              height: heightOfScreen / 50,
                             ),
                             Text(
                               '${user.hostelName}',
@@ -140,7 +139,7 @@ class UserProfilePage extends StatelessWidget {
                               ),
                             ),
                             SizedBox(
-                              height:heightOfScreen/50,
+                              height: heightOfScreen / 50,
                             ),
                             Text(
                               'About Me',
@@ -148,7 +147,7 @@ class UserProfilePage extends StatelessWidget {
                                   color: Colors.grey, letterSpacing: 2.0),
                             ),
                             SizedBox(
-                              height: heightOfScreen/50,
+                              height: heightOfScreen / 50,
                             ),
                             Text(
                               '${user.aboutMe}',
@@ -159,7 +158,7 @@ class UserProfilePage extends StatelessWidget {
                               ),
                             ),
                             SizedBox(
-                              height: heightOfScreen/50,
+                              height: heightOfScreen / 50,
                             ),
                             Divider(
                               height: 60,
@@ -179,7 +178,7 @@ class UserProfilePage extends StatelessWidget {
                                   color: Colors.grey,
                                 ),
                                 SizedBox(
-                                  width: heightOfScreen/50,
+                                  width: heightOfScreen / 50,
                                 ),
                                 Text(
                                   user.emailId,
@@ -192,7 +191,7 @@ class UserProfilePage extends StatelessWidget {
                               ],
                             ),
                             SizedBox(
-                              height: heightOfScreen/100,
+                              height: heightOfScreen / 100,
                             ),
                             Row(
                               children: [
@@ -201,7 +200,7 @@ class UserProfilePage extends StatelessWidget {
                                   color: Colors.grey,
                                 ),
                                 SizedBox(
-                                  width: heightOfScreen/50,
+                                  width: heightOfScreen / 50,
                                 ),
                                 Text(
                                   user.whatsappNumber,
@@ -214,7 +213,7 @@ class UserProfilePage extends StatelessWidget {
                               ],
                             ),
                             SizedBox(
-                              height: heightOfScreen/50,
+                              height: heightOfScreen / 50,
                             )
                           ],
                         ),
