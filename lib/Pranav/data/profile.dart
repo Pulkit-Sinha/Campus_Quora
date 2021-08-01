@@ -14,14 +14,14 @@ class UserProfile {
   
 
   UserProfile(
-      {this.name,
-       this.instagramId,
-       this.aboutMe,
-       this.degreeIn,
-       this.emailId,
-       this.graduationYear,
-       this.hostelName,
-       this.whatsappNumber,
-       this.profilePic,
+      {required this.name,
+      required this.instagramId,
+      required this.aboutMe,
+      required this.degreeIn,
+      required this.emailId,
+      required this.graduationYear,
+      required this.hostelName,
+      required this.whatsappNumber,
+      required this.profilePic,
       });
 }
