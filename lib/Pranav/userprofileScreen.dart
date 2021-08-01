@@ -7,7 +7,8 @@ class UserProfilePage extends StatelessWidget {
     double heightOfScreen =
         MediaQuery.of(context).size.height; // to get the height of device.
     UserProfile user = UserProfile(
-        name: 'N.A.',
+        firstname: 'N.A.',
+        secondname: ' ',
         instagramId: 'N.A.',
         aboutMe:
             'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus nec ante magna. Duis accumsan turpis a diam facilisis, non accumsan ligula consectetur. Suspendisse lacinia aliquet neque sed tempor. Vestibulum sit amet nunc ac urna tincidunt vestibulum in non felis. Nulla facilisi. Nam feugiat facilisis dolor, sit amet congue est rutrum sit amet.',
@@ -62,7 +63,7 @@ class UserProfilePage extends StatelessWidget {
                       color: Colors.grey[800],
                     ),
                     Container(
-                      height: heightOfScreen * (0.5),
+                      height: heightOfScreen * (0.4),
                       child: SingleChildScrollView(
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
@@ -75,13 +76,26 @@ class UserProfilePage extends StatelessWidget {
                             SizedBox(
                               height: heightOfScreen / 50,
                             ),
-                            Text(
-                              user.name,
-                              style: TextStyle(
-                                color: Colors.amberAccent,
-                                letterSpacing: 2.0,
-                                fontSize: 28,
-                              ),
+                            Row(
+                              children: [
+                                Text(
+                                  user.firstname,
+                                  style: TextStyle(
+                                    color: Colors.amberAccent,
+                                    letterSpacing: 2.0,
+                                    fontSize: 28,
+                                  ),
+                                ),
+                                SizedBox(height: 4,),
+                                Text(
+                                  user.secondname,
+                                  style: TextStyle(
+                                    color: Colors.amberAccent,
+                                    letterSpacing: 2.0,
+                                    fontSize: 28,
+                                  ),
+                                ),
+                              ],
                             ),
                             SizedBox(height: heightOfScreen / 50),
                             Text(

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:log_in/Pranav/HomePage.dart';
 import 'package:log_in/Pranav/userprofileScreen.dart';
-import 'package:log_in/Vansh/homePage.dart';
+import 'package:log_in/Vansh/navigationPage.dart';
 import 'package:log_in/log_in.dart';
 import 'package:log_in/make_account.dart';
 
@@ -21,6 +22,7 @@ class MyApp extends StatelessWidget {
         '/':(context)=>LogInPage(),
         '/makeAccount':(context)=>MakeAccount(),
         '/userProfilePage':(context)=>UserProfilePage(),
+        '/navigationPage':(context)=>NavigationPage(),
         '/homePage':(context)=>HomePage(),
       },
     );

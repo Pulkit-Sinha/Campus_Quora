@@ -7,7 +7,7 @@ class LogInPage extends StatelessWidget {
   void checkLoginStatus(BuildContext context) {
     //steps to check if LogIn info is correct
     if (isLogin == true) {
-      Navigator.pushNamed(context, '/homePage');
+      Navigator.pushNamed(context, '/navigationPage');
     }
   }
 
