@@ -7,13 +7,14 @@ class MakeAccount extends StatefulWidget {
 }
 
 class _MakeAccountState extends State<MakeAccount> {
-  @override
-  Widget build(BuildContext context) {
-
+  
     String dropdowndegreeValue = 'First Degree';
     String dropdowngenderValue = 'Male';
     String dropdownbranchValue = 'CSE';
     String dropdownyearValue = '2024';
+  @override
+  Widget build(BuildContext context) {
+
 
     return Scaffold(
       appBar: AppBar(
