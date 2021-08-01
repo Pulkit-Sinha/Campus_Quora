@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:log_in/Pranav/userprofileScreen.dart';
+import 'package:log_in/Vansh/homePage.dart';
 import 'package:log_in/log_in.dart';
 import 'package:log_in/make_account.dart';
 
@@ -14,7 +16,13 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      home: MakeAccount(),
+      initialRoute: '/',
+      routes: {
+        '/':(context)=>LogInPage(),
+        '/makeAccount':(context)=>MakeAccount(),
+        '/userProfilePage':(context)=>UserProfilePage(),
+        'homePage':(context)=>HomePage(),
+      },
     );
   }
 }
