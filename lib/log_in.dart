@@ -1,6 +1,16 @@
 import 'package:flutter/material.dart';
 
 class LogInPage extends StatelessWidget {
+  late String userName;
+  late String password;
+  late bool isLogin = true; //should be false initially.
+  void checkLoginStatus(BuildContext context) {
+    //steps to check if LogIn info is correct
+    if (isLogin == true) {
+      Navigator.pushNamed(context, '/homePage');
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -11,12 +21,18 @@ class LogInPage extends StatelessWidget {
           children: [
             Text('Log In'),
             TextField(
+              onChanged: (enteredUserName) {
+                userName = enteredUserName;
+              },
               decoration: InputDecoration(
                 labelText: 'Username',
               ),
             ),
             TextField(
               obscureText: true,
+              onChanged: (enteredPassword) {
+                password = enteredPassword;
+              },
               decoration: InputDecoration(
                 labelText: 'Password',
               ),
@@ -24,8 +40,14 @@ class LogInPage extends StatelessWidget {
             SizedBox(
               height: 20,
             ),
-            ElevatedButton(onPressed: (){}, child: Text('Login')),
-            SizedBox(height: 50,),
+            ElevatedButton(
+                onPressed: () {
+                  checkLoginStatus(context);
+                },
+                child: Text('Login')),
+            SizedBox(
+              height: 50,
+            ),
             ElevatedButton(
                 onPressed: () {
                   Navigator.pushNamed(context, '/makeAccount');

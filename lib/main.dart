@@ -21,7 +21,7 @@ class MyApp extends StatelessWidget {
         '/':(context)=>LogInPage(),
         '/makeAccount':(context)=>MakeAccount(),
         '/userProfilePage':(context)=>UserProfilePage(),
-        'homePage':(context)=>HomePage(),
+        '/homePage':(context)=>HomePage(),
       },
     );
   }
