@@ -234,6 +234,7 @@ class _MakeAccountState extends State<MakeAccount> {
                 ),
               ),
               SizedBox(height: 10),
+              ElevatedButton(onPressed: (){}, child: Text('Make Account')),
             ],
           ),
         ),
