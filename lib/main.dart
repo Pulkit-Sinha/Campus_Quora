@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:log_in/Pranav/route_generator.dart';
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 
 void main() {
   runApp(MyApp());
