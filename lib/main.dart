@@ -1,30 +1,29 @@
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
+import 'package:log_in/Pranav/data/profile.dart';
 import 'package:log_in/Pranav/route_generator.dart';
-import 'package:firebase_auth/firebase_auth.dart';
-import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:log_in/Screens/Wrapper.dart';
+import 'package:log_in/Services/auth.dart';
+import 'package:provider/provider.dart';
 
-void main() {
+Future<void> main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp();
   runApp(MyApp());
 }
 
 class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'Flutter Demo',
-      debugShowCheckedModeBanner: false,
-      theme: ThemeData(
-        primarySwatch: Colors.blue,
+    return StreamProvider<Profile?>.value(
+      catchError: (_,__)=>null,
+      value: AuthService().user,
+      initialData: null,
+      child: MaterialApp(
+        onGenerateRoute: RouteGenerator.generateRoute,
+        debugShowCheckedModeBanner: false,
+        home: Wrapper(),
       ),
-      initialRoute: '/',
-      onGenerateRoute:RouteGenerator.generateRoute,
-      // routes: {
-      //   '/':(context)=>LogInPage(),
-      //   '/makeAccount':(context)=>MakeAccount(),
-      //   '/userProfilePage':(context)=>UserProfilePage(),
-      //   '/navigationPage':(context)=>NavigationPage(),
-      //   '/homePage':(context)=>HomePage(),
-      // },
     );
   }
 }

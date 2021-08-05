@@ -13,8 +13,8 @@ class UserProfilePage extends StatelessWidget {
         aboutMe:
             'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus nec ante magna. Duis accumsan turpis a diam facilisis, non accumsan ligula consectetur. Suspendisse lacinia aliquet neque sed tempor. Vestibulum sit amet nunc ac urna tincidunt vestibulum in non felis. Nulla facilisi. Nam feugiat facilisis dolor, sit amet congue est rutrum sit amet.',
         degreeIn: 'N.A.',
-        emailId: 'N.A.',
-        graduationYear: 2024,
+        BitsId: 'N.A.',
+        graduationYear: '2024',
         hostelName: 'N.A.',
         whatsappNumber: 'N.A.',
         profilePic: 'profilepicdefault.jpg');
@@ -195,7 +195,7 @@ class UserProfilePage extends StatelessWidget {
                                   width: heightOfScreen / 50,
                                 ),
                                 Text(
-                                  user.emailId,
+                                  user.BitsId,
                                   style: TextStyle(
                                     color: Colors.grey[500],
                                     fontSize: 18,

@@ -1,10 +1,13 @@
-import 'package:flutter/cupertino.dart';
+class Profile {
+  String uid;
+  Profile({required this.uid});
+}
 
 class UserProfile {
   String firstname = 'N.A.';
   String secondname = 'N.A.';
-  String emailId = 'N.A.';
-  int graduationYear = 2024;
+  String BitsId = 'N.A.';
+  String graduationYear = '2024';
   String degreeIn = 'N.A.';
   String hostelName = 'N.A.';
   String aboutMe = 'N.A.';
@@ -12,6 +15,7 @@ class UserProfile {
   String instagramId = 'N.A.';
   String profilePic = 'profilepicdefault.jpg';
   int numberOfPosts = 0;
+  bool firstTimeLogIn = true;
 
   UserProfile({
     required this.firstname,
@@ -19,7 +23,7 @@ class UserProfile {
     required this.instagramId,
     required this.aboutMe,
     required this.degreeIn,
-    required this.emailId,
+    required this.BitsId,
     required this.graduationYear,
     required this.hostelName,
     required this.whatsappNumber,
