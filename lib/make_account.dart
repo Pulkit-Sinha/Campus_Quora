@@ -144,7 +144,7 @@ class _MakeAccountState extends State<MakeAccount> {
                         //degreeIn = newValue;
                       });
                     },
-                    items: ['First Degree', 'Higher Degree', 'PhD']
+                    items: ['Type of Degree','First Degree', 'Higher Degree', 'PhD']
                         .map<DropdownMenuItem<String>>((String value) {
                       return DropdownMenuItem<String>(
                         value: value,
@@ -179,7 +179,7 @@ class _MakeAccountState extends State<MakeAccount> {
                         dropdowngenderValue = newValue!;
                       });
                     },
-                    items: ['Male', 'Female', 'Other']
+                    items: ['Gender','Male', 'Female', 'Other']
                         .map<DropdownMenuItem<String>>((String value) {
                       return DropdownMenuItem<String>(
                         value: value,
