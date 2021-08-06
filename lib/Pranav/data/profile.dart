@@ -15,7 +15,8 @@ class UserProfile {
   String instagramId = 'N.A.';
   String profilePic = 'profilepicdefault.jpg';
   int numberOfPosts = 0;
-  bool firstTimeLogIn = true;
+  bool firstLogIn = true;
+  String emailId='N.A.';
 
   UserProfile({
     required this.firstname,
@@ -28,5 +29,6 @@ class UserProfile {
     required this.hostelName,
     required this.whatsappNumber,
     required this.profilePic,
+    required this.emailId,
   });
 }

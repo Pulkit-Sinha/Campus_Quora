@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:log_in/Pranav/data/profile.dart';
 import 'package:log_in/Services/auth.dart';
+import 'package:log_in/Services/database.dart';
+import 'package:provider/provider.dart';
 
 class MakeAccount extends StatefulWidget {
   @override
@@ -9,7 +12,7 @@ class MakeAccount extends StatefulWidget {
 class _MakeAccountState extends State<MakeAccount> {
   final AuthService _auth = AuthService();
   bool loading = false;
-  String email = '';
+  String emailId = '';
   String password = '';
   String error = '';
   String firstname = '';
@@ -26,13 +29,14 @@ class _MakeAccountState extends State<MakeAccount> {
 
   final _formKey = GlobalKey<FormState>();
 
-  String dropdowndegreeValue = 'First Degree';
-  String dropdowngenderValue = 'Male';
-  String dropdownbranchValue = 'CSE';
+  String dropdowndegreeValue = 'Type of Degree';
+  String dropdowngenderValue = 'Gender';
+  String dropdownbranchValue = 'Branch';
   String dropdownyearValue = '2024';
 
   @override
   Widget build(BuildContext context) {
+    final user = Provider.of<Profile?>(context);
     return Scaffold(
       appBar: AppBar(
         title: Text('Make Account'),
@@ -83,7 +87,6 @@ class _MakeAccountState extends State<MakeAccount> {
                       fit: FlexFit.tight,
                       flex: 1,
                       child: TextFormField(
-                        key: _formKey,
                         validator: (val) =>
                             val!.isEmpty ? 'second name cannot be empty' : null,
                         onChanged: (val) {
@@ -124,20 +127,21 @@ class _MakeAccountState extends State<MakeAccount> {
                 ),
                 Container(
                   width: double.infinity,
-                  child: DropdownButton(
+                  child: DropdownButtonFormField(
                     value: dropdowndegreeValue,
                     icon: const Icon(Icons.arrow_downward),
                     iconSize: 24,
                     isExpanded: true,
                     elevation: 16,
                     style: const TextStyle(color: Colors.deepPurple),
-                    underline: Container(
-                      height: 2,
-                      color: Colors.deepPurpleAccent,
-                    ),
+                    // underline: Container(
+                    //   height: 2,
+                    //   color: Colors.deepPurpleAccent,
+                    // ),
                     onChanged: (String? newValue) {
                       setState(() {
                         dropdowndegreeValue = newValue!;
+                        //degreeIn = newValue;
                       });
                     },
                     items: ['First Degree', 'Higher Degree', 'PhD']
@@ -193,25 +197,28 @@ class _MakeAccountState extends State<MakeAccount> {
                   ),
                 ),
                 Container(
+                  
                   width: double.infinity,
-                  child: DropdownButton(
+                  child: DropdownButtonFormField(
+                    
                     value: dropdownbranchValue,
                     icon: const Icon(Icons.arrow_downward),
                     iconSize: 24,
                     isExpanded: true,
                     elevation: 16,
                     style: const TextStyle(color: Colors.deepPurple),
-                    underline: Container(
-                      height: 2,
-                      color: Colors.deepPurpleAccent,
-                    ),
+                    // underline: Container(
+                    //   height: 2,
+                    //   color: Colors.deepPurpleAccent,
+                    // ),
                     onChanged: (String? newValue) {
                       setState(() {
                         dropdownbranchValue = newValue!;
+                        degreeIn = newValue;
                       });
                     },
-                    items:
-                        ['CSE'].map<DropdownMenuItem<String>>((String value) {
+                    items: ['Branch','CSE', 'EEE', 'ME', 'Chem.', 'Civil', 'B.Pharm']
+                        .map<DropdownMenuItem<String>>((String value) {
                       return DropdownMenuItem<String>(
                         value: value,
                         child: Text(value),
@@ -227,7 +234,13 @@ class _MakeAccountState extends State<MakeAccount> {
                     textAlign: TextAlign.left,
                   ),
                 ),
-                TextField(),
+                TextFormField(
+                  onChanged: (val) {
+                    whatsappNumber = val;
+                  },
+                  validator: (val) =>
+                      val!.isEmpty ? 'Please enter a contact number' : null,
+                ),
                 SizedBox(height: 10),
                 Container(
                   width: double.infinity,
@@ -236,7 +249,28 @@ class _MakeAccountState extends State<MakeAccount> {
                     textAlign: TextAlign.left,
                   ),
                 ),
-                TextField(),
+                TextFormField(
+                  validator: (val) => val!.isEmpty ? 'Enter email' : null,
+                  onChanged: (val) {
+                    emailId = val;
+                  },
+                ),
+                SizedBox(height: 10),
+                Container(
+                  width: double.infinity,
+                  child: Text(
+                    'About Me',
+                    textAlign: TextAlign.left,
+                  ),
+                ),
+                TextFormField(
+                  validator: (val) => val!.isEmpty
+                      ? 'Please tell something about yourself..anything will work'
+                      : null,
+                  onChanged: (val) {
+                    aboutMe = val;
+                  },
+                ),
                 SizedBox(height: 10),
                 Container(
                   width: double.infinity,
@@ -245,35 +279,61 @@ class _MakeAccountState extends State<MakeAccount> {
                     textAlign: TextAlign.left,
                   ),
                 ),
-                Container(
-                  width: double.infinity,
-                  child: DropdownButton(
-                    value: dropdownyearValue,
-                    icon: const Icon(Icons.arrow_downward),
-                    iconSize: 24,
-                    isExpanded: true,
-                    elevation: 16,
-                    style: const TextStyle(color: Colors.deepPurple),
-                    underline: Container(
-                      height: 2,
-                      color: Colors.deepPurpleAccent,
-                    ),
-                    onChanged: (String? newValue) {
-                      setState(() {
-                        dropdownyearValue = newValue!;
-                      });
-                    },
-                    items:
-                        ['2024'].map<DropdownMenuItem<String>>((String value) {
-                      return DropdownMenuItem<String>(
-                        value: value,
-                        child: Text(value),
-                      );
-                    }).toList(),
-                  ),
+                // Container(
+                //   width: double.infinity,
+                //   child: DropdownButton(
+                //     value: dropdownyearValue,
+                //     icon: const Icon(Icons.arrow_downward),
+                //     iconSize: 24,
+                //     isExpanded: true,
+                //     elevation: 16,
+                //     style: const TextStyle(color: Colors.deepPurple),
+                //     underline: Container(
+                //       height: 2,
+                //       color: Colors.deepPurpleAccent,
+                //     ),
+                //     onChanged: (String? newValue) {
+                //       setState(() {
+                //         dropdownyearValue = newValue!;
+                //       });
+                //     },
+                //     items:
+                //         ['2024'].map<DropdownMenuItem<String>>((String value) {
+                //       return DropdownMenuItem<String>(
+                //         value: value,
+                //         child: Text(value),
+                //       );
+                //     }).toList(),
+                //   ),
+                // ),
+                TextFormField(
+                  validator: (val) =>
+                      val!.isEmpty ? 'Enter Graduation Year' : null,
+                  onChanged: (val) {
+                    graduationYear = val;
+                  },
                 ),
                 SizedBox(height: 10),
-                ElevatedButton(onPressed: () {}, child: Text('Make Account')),
+                ElevatedButton(
+                    onPressed: () async {
+                      if (_formKey.currentState!.validate()) {
+                        await DatabaseService(uid: user!.uid).updateUserProfile(
+                            firstname: firstname,
+                            secondname: secondname,
+                            instagramId: instagramId,
+                            aboutMe: aboutMe,
+                            degreeIn: degreeIn,
+                            BitsId: BitsId,
+                            graduationYear: graduationYear,
+                            hostelName: hostelName,
+                            whatsappNumber: whatsappNumber,
+                            profilePic: profilePic,
+                            firstLogin: false,
+                            emailId: emailId,
+                            numberOfPosts: 0);
+                      }
+                    },
+                    child: Text('Make Account')),
               ],
             ),
           ),
