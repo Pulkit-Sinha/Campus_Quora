@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:log_in/Services/auth.dart';
 import 'package:log_in/shared/constants.dart';
 import 'package:log_in/shared/loading.dart';
@@ -33,6 +34,7 @@ class _LogInPageState extends State<LogInPage> {
     return loading == true
         ? Loading()
         : Scaffold(
+          backgroundColor: Colors.black12,
             body: Container(
               padding: const EdgeInsets.all(12.0),
               child: Form(
@@ -40,7 +42,7 @@ class _LogInPageState extends State<LogInPage> {
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    Text('Log In'),
+                    Text('Log In',style: TextStyle(color: Colors.white),),
                     TextFormField(
                       onChanged: (enteredEmail) {
                         email = enteredEmail;
@@ -103,6 +105,27 @@ class _LogInPageState extends State<LogInPage> {
                     ),
                     SizedBox(
                       height: 50,
+                    ),
+                    ElevatedButton.icon(
+                      style: ElevatedButton.styleFrom(
+                        primary: Colors.white,
+                        onPrimary: Colors.black,
+                        minimumSize: Size(double.infinity, 50),
+                      ),
+                      onPressed: ()async {
+                        setState(() {
+                              loading = true;
+                            });
+                            dynamic result = await _auth.googleLogin();
+                                
+                            if (result == null) {
+                              setState(() {
+                                loading = false;
+                                error = 'Could not sign with those credentials';
+                              });
+                      }},
+                      icon: FaIcon(FontAwesomeIcons.google,color: Colors.red,),
+                      label: Text('Sign Up With Google'),
                     ),
                     ElevatedButton(
                         onPressed: () {

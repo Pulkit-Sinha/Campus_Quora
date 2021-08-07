@@ -1,3 +1,4 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:log_in/Services/database.dart';
 import 'package:provider/provider.dart';
@@ -12,6 +13,7 @@ class _UserProfilePageState extends State<UserProfilePage> {
   @override
   Widget build(BuildContext context) {
     final userr = Provider.of<Profile?>(context);
+    final currentUser=FirebaseAuth.instance.currentUser;
     print(userr!.uid);
     double heightOfScreen =
         MediaQuery.of(context).size.height; // to get the height of device.
@@ -51,7 +53,8 @@ class _UserProfilePageState extends State<UserProfilePage> {
                     Center(
                       child: CircleAvatar(
                         backgroundImage:
-                            AssetImage('assets/images/${user.profilePic}'),
+                          AssetImage('assets/images/profilepicdefault.jpg'),
+                           
                         radius: heightOfScreen /
                             15, // now remaining height is height - 100
                       ),
