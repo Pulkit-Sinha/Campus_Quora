@@ -14,7 +14,7 @@ class _UserProfilePageState extends State<UserProfilePage> {
   Widget build(BuildContext context) {
     final userr = Provider.of<Profile?>(context);
     final currentUser=FirebaseAuth.instance.currentUser;
-    print(userr!.uid);
+    
     double heightOfScreen =
         MediaQuery.of(context).size.height; // to get the height of device.
     // UserProfile user = UserProfile(
@@ -32,7 +32,7 @@ class _UserProfilePageState extends State<UserProfilePage> {
     //     emailId: 'N.A.');
 
     return StreamBuilder<UserProfile>(
-        stream: DatabaseService(uid: userr.uid).userProfile,
+        stream: DatabaseService(uid: userr!.uid).userProfile,
         builder: (context, snapshot) {
           if (!snapshot.hasData) {
             return Text('Error');

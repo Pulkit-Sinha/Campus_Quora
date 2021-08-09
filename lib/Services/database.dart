@@ -1,5 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:log_in/Pranav/data/profile.dart';
+import 'package:log_in/feedData/question.dart';
 
 class DatabaseService {
   String uid;
@@ -8,6 +9,8 @@ class DatabaseService {
   //collection reference
   final CollectionReference userDataCollection =
       FirebaseFirestore.instance.collection('userData');
+  final CollectionReference questionCollection =
+      FirebaseFirestore.instance.collection('questions');
 
   Future updateUserProfile(
       {required String firstname,
@@ -40,6 +43,12 @@ class DatabaseService {
     });
   }
 
+  Future updateQuestion(String question) async {
+    return await questionCollection.doc(question).set({
+      'question': question,
+    });
+  }
+
   UserProfile userDataFromSnapshot(DocumentSnapshot snapshot) {
     return UserProfile(
         firstname: snapshot.get('firstname'),
@@ -57,5 +66,15 @@ class DatabaseService {
 
   Stream<UserProfile> get userProfile {
     return userDataCollection.doc(uid).snapshots().map(userDataFromSnapshot);
+  }
+
+  List<Question> _questionListFromSnapshot(QuerySnapshot snapshot) {
+    return snapshot.docs.map((e) {
+      return Question(question: e.get('question') ?? "");
+    }).toList();
+  }
+
+  Stream<List<Question>> get questions {
+    return questionCollection.snapshots().map(_questionListFromSnapshot);
   }
 }
