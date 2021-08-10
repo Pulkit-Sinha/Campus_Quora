@@ -36,112 +36,114 @@ class _LogInPageState extends State<LogInPage> {
         : Scaffold(
           backgroundColor: Colors.black12,
             body: SingleChildScrollView(
-              child: Column(
-                children: [
-                  Container(
-                    padding: const EdgeInsets.all(12.0),
-                    child: Form(
-                      key: _formKey,
-                      child: Column(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          Text('Log In',style: TextStyle(color: Colors.white),),
-                          TextFormField(
-                            onChanged: (enteredEmail) {
-                              email = enteredEmail;
-                            },
-                            decoration:
-                                textInputDecoration.copyWith(hintText: 'Email'),
-                            validator: (val) =>
-                                val!.isEmpty ? 'Enter an email' : null,
-                          ),
-                          SizedBox(
-                            height: 20,
-                          ),
-                          TextFormField(
-                            decoration: textInputDecoration.copyWith(
-                              hintText: 'Password',
-                              suffixIcon: IconButton(
-                                  onPressed: () {
-                                    setState(() {
-                                      obsecurePassword = !obsecurePassword;
-                                    });
-                                  },
-                                  icon: Icon(Icons.lock)),
+              child: Container(
+                child: Column(
+                  children: [
+                    Container(
+                      padding: const EdgeInsets.all(12.0),
+                      child: Form(
+                        key: _formKey,
+                        child: Column(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            Text('Log In',style: TextStyle(color: Colors.white),),
+                            TextFormField(
+                              onChanged: (enteredEmail) {
+                                email = enteredEmail;
+                              },
+                              decoration:
+                                  textInputDecoration.copyWith(hintText: 'Email'),
+                              validator: (val) =>
+                                  val!.isEmpty ? 'Enter an email' : null,
                             ),
-                            validator: (val) => val!.length < 6
-                                ? 'Password must have atleast 6 characters'
-                                : null,
-                            obscureText: obsecurePassword,
-                            onChanged: (val) {
-                              password = val;
-                            },
-                          ),
-                          SizedBox(
-                            height: 20,
-                          ),
-                          ElevatedButton(
-                              onPressed: () async {
-                                if (_formKey.currentState!.validate()) {
-                                  setState(() {
-                                    loading = true;
-                                  });
-                                  dynamic result = await _auth
-                                      .signInWithEmailAndPassword(email, password);
-                                  if (result == null) {
+                            SizedBox(
+                              height: 20,
+                            ),
+                            TextFormField(
+                              decoration: textInputDecoration.copyWith(
+                                hintText: 'Password',
+                                suffixIcon: IconButton(
+                                    onPressed: () {
+                                      setState(() {
+                                        obsecurePassword = !obsecurePassword;
+                                      });
+                                    },
+                                    icon: Icon(Icons.lock)),
+                              ),
+                              validator: (val) => val!.length < 6
+                                  ? 'Password must have atleast 6 characters'
+                                  : null,
+                              obscureText: obsecurePassword,
+                              onChanged: (val) {
+                                password = val;
+                              },
+                            ),
+                            SizedBox(
+                              height: 20,
+                            ),
+                            ElevatedButton(
+                                onPressed: () async {
+                                  if (_formKey.currentState!.validate()) {
                                     setState(() {
-                                      loading = false;
-                                      error = 'Could not sign with those credentials';
+                                      loading = true;
                                     });
+                                    dynamic result = await _auth
+                                        .signInWithEmailAndPassword(email, password);
+                                    if (result == null) {
+                                      setState(() {
+                                        loading = false;
+                                        error = 'Could not sign with those credentials';
+                                      });
+                                    }
+
+                                    //if user gets a succesful result then ...(to be completed)
                                   }
-
-                                  //if user gets a succesful result then ...(to be completed)
-                                }
-                              },
-                              child: Text('Login')),
-                          SizedBox(
-                            height: 12,
-                          ),
-                          Text(
-                            error,
-                            style: TextStyle(color: Colors.red, fontSize: 14.0),
-                          ),
-                          SizedBox(
-                            height: 50,
-                          ),
-                          ElevatedButton.icon(
-                            style: ElevatedButton.styleFrom(
-                              primary: Colors.white,
-                              onPrimary: Colors.black,
-                              minimumSize: Size(double.infinity, 50),
+                                },
+                                child: Text('Login')),
+                            SizedBox(
+                              height: 12,
                             ),
-                            onPressed: ()async {
-                              setState(() {
-                                    loading = true;
-                                  });
-                                  dynamic result = await _auth.googleLogin();
-
-                                  if (result == null) {
-                                    setState(() {
-                                      loading = false;
-                                      error = 'Could not sign with those credentials';
+                            Text(
+                              error,
+                              style: TextStyle(color: Colors.red, fontSize: 14.0),
+                            ),
+                            SizedBox(
+                              height: 50,
+                            ),
+                            ElevatedButton.icon(
+                              style: ElevatedButton.styleFrom(
+                                primary: Colors.white,
+                                onPrimary: Colors.black,
+                                minimumSize: Size(double.infinity, 50),
+                              ),
+                              onPressed: ()async {
+                                setState(() {
+                                      loading = true;
                                     });
-                            }},
-                            icon: FaIcon(FontAwesomeIcons.google,color: Colors.red,),
-                            label: Text('Sign Up With Google'),
-                          ),
-                          ElevatedButton(
-                              onPressed: () {
-                                widget.toggleView();
-                              },
-                              child: Text(
-                                'Don\'t have an account? Sign up here.',
-                              ))
-                        ],
+                                    dynamic result = await _auth.googleLogin();
+
+                                    if (result == null) {
+                                      setState(() {
+                                        loading = false;
+                                        error = 'Could not sign with those credentials';
+                                      });
+                              }},
+                              icon: FaIcon(FontAwesomeIcons.google,color: Colors.red,),
+                              label: Text('Sign Up With Google'),
+                            ),
+                            ElevatedButton(
+                                onPressed: () {
+                                  widget.toggleView();
+                                },
+                                child: Text(
+                                  'Don\'t have an account? Sign up here.',
+                                ))
+                          ],
+                        ),
                       ),
                     ),
-                  ),
-                ],
+                  ],
+                ),
               ),
             ),
           );
