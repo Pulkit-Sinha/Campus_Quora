@@ -16,6 +16,7 @@ class AnswerList extends StatefulWidget {
 class _AnswerListState extends State<AnswerList> {
   @override
   Widget build(BuildContext context) {
+    double height = (MediaQuery.of(context).size.height);
     final user = Provider.of<Profile?>(context);
     //final answers = DatabaseService(uid: user!.uid).getAnswers(widget.question);
     return StreamBuilder<List<Answer>>(
@@ -29,25 +30,9 @@ class _AnswerListState extends State<AnswerList> {
                     appBar: AppBar(
                       title: Text('View Answers'),
                     ),
-                    body: Column(children: [
-                      Padding(
-                        padding: const EdgeInsets.fromLTRB(0, 10, 0, 0),
-                        child: Text(
-                          widget.question,
-                          style: TextStyle(fontSize: 20),
-                        ),
-                      ),
-                      SizedBox(
-                        height: 20,
-                      ),
-                      Center(child: Text('This question is not yet answered'),)
-                    ]))
-                : Scaffold(
-                    appBar: AppBar(
-                      title: Text('View Answers'),
-                    ),
-                    body: Column(
-                      children: [
+                    body: Container(
+                      height: height * 0.9,
+                      child: Column(children: [
                         Padding(
                           padding: const EdgeInsets.fromLTRB(0, 10, 0, 0),
                           child: Text(
@@ -58,16 +43,44 @@ class _AnswerListState extends State<AnswerList> {
                         SizedBox(
                           height: 20,
                         ),
-                        Container(
-                          height: (MediaQuery.of(context).size.height) * (0.78),
-                          child: ListView.builder(
-                            itemBuilder: (context, index) {                            
-                              return AnswerTile(answer: answers[index]);
-                            },
-                            itemCount: answers.length,
-                          ),
+                        Center(
+                          child: Text('This question is not yet answered'),
+                        )
+                      ]),
+                    ),
+                  )
+                : Scaffold(
+                    appBar: AppBar(
+                      title: Text('View Answers'),
+                    ),
+                    body: SingleChildScrollView(
+                      child: Container(
+                        height: height * (0.9),
+                        child: Column(
+                          children: [
+                            Padding(
+                              padding: const EdgeInsets.fromLTRB(0, 10, 0, 0),
+                              child: Text(
+                                widget.question,
+                                style: TextStyle(fontSize: 20),
+                              ),
+                            ),
+                            SizedBox(
+                              height: 20,
+                            ),
+                            Container(
+                              height: height * (0.7),
+                              child: ListView.builder(
+                                shrinkWrap: true,
+                                itemBuilder: (context, index) {
+                                  return AnswerTile(answer: answers[index]);
+                                },
+                                itemCount: answers.length,
+                              ),
+                            ),
+                          ],
                         ),
-                      ],
+                      ),
                     ),
                   );
           } else {

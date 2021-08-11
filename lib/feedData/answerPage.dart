@@ -24,58 +24,89 @@ class _AnswerPageState extends State<AnswerPage> {
         title: Text('Answer a question'),
         toolbarHeight: screenheight * (0.095),
       ),
-      body: Container(
-        height: screenheight * (0.9),
-        padding: EdgeInsets.all(10),
-        child: SingleChildScrollView(
-          child: Column(
-            children: [
-              Text(
-                'Question : ${widget.question}',
-                style: TextStyle(fontSize: 20),
-              ),
-              SizedBox(
-                height: 20,
-              ),
-              Form(
-                key: _formKey,
+      body: StreamBuilder<UserProfile>(
+          stream: DatabaseService(uid: user!.uid).userProfile,
+          builder: (context, snapshot) {
+            if (!snapshot.hasData) {
+              return Text('Error');
+            }
+            UserProfile? userr = snapshot.data;
+            return Container(
+              height: screenheight * (0.9),
+              padding: EdgeInsets.all(10),
+              child: SingleChildScrollView(
                 child: Column(
                   children: [
-                    TextFormField(
-                      keyboardType: TextInputType.multiline,
-                      maxLines: null,
-                      decoration:
-                          textInputDecoration.copyWith(hintText: 'Answer here'),
-                      validator: (val) =>
-                          val!.isEmpty ? 'Please type something' : null,
-                      onChanged: (val) {
-                        answer = val;
-                      },
+                    Text(
+                      'Question : ${widget.question}',
+                      style: TextStyle(fontSize: 20),
                     ),
-                    ElevatedButton(
-                        onPressed: () {
-                          if (_formKey.currentState!.validate()) {
-                            String answername = '';
-                            if (answer.length >= 1000) {
-                              answername = answer.substring(0, 1000);
-                            } else {
-                              answername = answer;
-                            }
-                            answername.replaceAll("/", "_");
-                            answer.replaceAll("/", "-");
-                            DatabaseService(uid: user!.uid).updateAnswer(
-                                widget.question, answername, answer);
-                            Navigator.of(context).pop();
-                          }
-                        },
-                        child: Text('Post this answer'))
+                    SizedBox(
+                      height: 20,
+                    ),
+                    Form(
+                      key: _formKey,
+                      child: Column(
+                        children: [
+                          TextFormField(
+                            keyboardType: TextInputType.multiline,
+                            maxLines: null,
+                            decoration: textInputDecoration.copyWith(
+                                hintText: 'Answer here'),
+                            validator: (val) =>
+                                val!.isEmpty ? 'Please type something' : null,
+                            onChanged: (val) {
+                              answer = val;
+                            },
+                          ),
+                          ElevatedButton(
+                              onPressed: () async {
+                                if (_formKey.currentState!.validate()) {
+                                  String answername = '';
+                                  if (answer.length >= 1000) {
+                                    answername = answer.substring(0, 1000);
+                                  } else {
+                                    answername = answer;
+                                  }
+                                  answername =
+                                      await answername.replaceAll("/", "_");
+                                  await DatabaseService(uid: user.uid)
+                                      .updateAnswer(
+                                    widget.question,
+                                    answername,
+                                    answer,
+                                    userr!.firstname,
+                                    DateTime.now().toString(),
+                                    userr.profilePic,
+                                  );
+                                  await DatabaseService(uid: user.uid)
+                                      .updateUserProfile(
+                                          firstname: userr.firstname,
+                                          secondname: userr.secondname,
+                                          instagramId: userr.instagramId,
+                                          aboutMe: userr.aboutMe,
+                                          degreeIn: userr.degreeIn,
+                                          BitsId: userr.BitsId,
+                                          graduationYear: userr.graduationYear,
+                                          hostelName: userr.hostelName,
+                                          whatsappNumber: userr.whatsappNumber,
+                                          profilePic: userr.profilePic,
+                                          firstLogin: false,
+                                          emailId: userr.emailId,
+                                          numberOfPosts:
+                                              userr.numberOfPosts + 1);
+                                  Navigator.of(context).pop();
+                                }
+                              },
+                              child: Text('Post this answer'))
+                        ],
+                      ),
+                    )
                   ],
                 ),
-              )
-            ],
-          ),
-        ),
-      ),
+              ),
+            );
+          }),
     );
   }
 }

@@ -13,23 +13,8 @@ class _UserProfilePageState extends State<UserProfilePage> {
   @override
   Widget build(BuildContext context) {
     final userr = Provider.of<Profile?>(context);
-    final currentUser=FirebaseAuth.instance.currentUser;
-    
-    double heightOfScreen =
-        MediaQuery.of(context).size.height; // to get the height of device.
-    // UserProfile user = UserProfile(
-    //     firstname: 'N.A.',
-    //     secondname: ' ',
-    //     instagramId: 'N.A.',
-    //     aboutMe:
-    //         'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus nec ante magna. Duis accumsan turpis a diam facilisis, non accumsan ligula consectetur. Suspendisse lacinia aliquet neque sed tempor. Vestibulum sit amet nunc ac urna tincidunt vestibulum in non felis. Nulla facilisi. Nam feugiat facilisis dolor, sit amet congue est rutrum sit amet.',
-    //     degreeIn: 'N.A.',
-    //     BitsId: 'N.A.',
-    //     graduationYear: '2024',
-    //     hostelName: 'N.A.',
-    //     whatsappNumber: 'N.A.',
-    //     profilePic: 'profilepicdefault.jpg',
-    //     emailId: 'N.A.');
+
+    double heightOfScreen = MediaQuery.of(context).size.height;
 
     return StreamBuilder<UserProfile>(
         stream: DatabaseService(uid: userr!.uid).userProfile,
@@ -53,8 +38,8 @@ class _UserProfilePageState extends State<UserProfilePage> {
                     Center(
                       child: CircleAvatar(
                         backgroundImage:
-                          AssetImage('assets/images/profilepicdefault.jpg'),
-                           
+                            AssetImage('assets/images/profilepicdefault.jpg'),
+
                         radius: heightOfScreen /
                             15, // now remaining height is height - 100
                       ),
@@ -96,17 +81,14 @@ class _UserProfilePageState extends State<UserProfilePage> {
                                   SizedBox(
                                     height: heightOfScreen / 50,
                                   ),
-                                  
-                                      Text(
-                                        ('${user.firstname} ${user.secondname}'),
-                                        style: TextStyle(
-                                          color: Colors.amberAccent,
-                                          letterSpacing: 2.0,
-                                          fontSize: 28,
-                                        ),
-                                      ),
-                                      
-                                  
+                                  Text(
+                                    ('${user.firstname} ${user.secondname}'),
+                                    style: TextStyle(
+                                      color: Colors.amberAccent,
+                                      letterSpacing: 2.0,
+                                      fontSize: 28,
+                                    ),
+                                  ),
                                   SizedBox(height: heightOfScreen / 50),
                                   Text(
                                     'Graduation Year',

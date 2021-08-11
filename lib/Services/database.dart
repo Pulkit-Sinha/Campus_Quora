@@ -52,13 +52,16 @@ class DatabaseService {
     });
   }
 
-  Future updateAnswer(String question, String answername,String answer) async {
+  Future updateAnswer(String question, String answername,String answer,String name,String date,String image) async {
     return await questionCollection
         .doc(question)
         .collection('answers')
-        .doc(answername)
+        .doc(answer)
         .set({
       'answer': answer,
+      'name':name,
+      'date':date,
+      'image':image,
     });
   }
 
@@ -74,6 +77,7 @@ class DatabaseService {
         whatsappNumber: snapshot.get('whatsappNumber'),
         instagramId: snapshot.get('instagramId'),
         profilePic: snapshot.get('profilePic'),
+        numberOfPosts: snapshot.get('numberOfPosts'),
         emailId: snapshot.get('emailId'));
   }
 
@@ -93,7 +97,7 @@ class DatabaseService {
 
   List<Answer> _answerListFromSnapshot(QuerySnapshot snapshot) {
     return snapshot.docs.map((e) {
-      return Answer(answer: e.get('answer') ?? "");
+      return Answer(answer: e.get('answer') ?? "",name: e.get('name')??"",date: e.get('date')??"",image: e.get('image'));
     }).toList();
   }
   Stream<List<Answer>> getAnswers(String question){

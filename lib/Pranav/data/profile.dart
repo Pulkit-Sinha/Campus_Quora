@@ -29,6 +29,8 @@ class UserProfile {
     required this.hostelName,
     required this.whatsappNumber,
     required this.profilePic,
+    required this.numberOfPosts,
     required this.emailId,
+    
   });
 }
