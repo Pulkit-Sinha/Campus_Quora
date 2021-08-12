@@ -7,13 +7,20 @@ import 'package:log_in/feedData/answers.dart';
 import 'package:log_in/shared/loading.dart';
 import 'package:provider/provider.dart';
 
-class AnswerTile extends StatelessWidget {
+class AnswerTile extends StatefulWidget {
   final Answer answer;
   String question;
-  //final UserProfile userprofile;
+
   AnswerTile({required this.answer, required this.question});
 
-  alertDialogResult(BuildContext context, String answername,
+  @override
+  _AnswerTileState createState() => _AnswerTileState();
+}
+
+class _AnswerTileState extends State<AnswerTile> {
+  bool deleteAnswer = false;
+
+  alertDialogResult(BuildContext Alertcontext, String answername,
       UserProfile currentUser, Profile user) {
     var alertDialog = AlertDialog(
       title: Text('Confirm Delete'),
@@ -21,47 +28,22 @@ class AnswerTile extends StatelessWidget {
       actions: [
         ElevatedButton(
             onPressed: () {
-              Navigator.of(context).pop();
+              Navigator.pop(Alertcontext, 'No');
             },
             child: Text('No')),
         ElevatedButton(
             onPressed: () async {
-              if (answer.answer.length >= 1000) {
-                answername = answer.answer.substring(0, 1000);
-              } else {
-                answername = answer.answer;
-              }
-              answername = await answername.replaceAll("/", "_");
-              await FirebaseFirestore.instance
-                  .collection('questions')
-                  .doc(question)
-                  .collection('answers')
-                  .doc(answername)
-                  .delete();
-                  Navigator.of(context).pop();
-              await DatabaseService(uid: user.uid).updateUserProfile(
-                  firstname: currentUser.firstname,
-                  secondname: currentUser.secondname,
-                  instagramId: currentUser.instagramId,
-                  aboutMe: currentUser.aboutMe,
-                  degreeIn: currentUser.degreeIn,
-                  BitsId: currentUser.BitsId,
-                  graduationYear: currentUser.graduationYear,
-                  hostelName: currentUser.hostelName,
-                  whatsappNumber: currentUser.whatsappNumber,
-                  profilePic: currentUser.profilePic,
-                  firstLogin: false,
-                  emailId: currentUser.emailId,
-                  numberOfPosts: currentUser.numberOfPosts - 1);
-
-              
+              setState(() {
+                deleteAnswer = true;
+              });
+              Navigator.pop(Alertcontext, 'Yes');
             },
             child: Text('Yes')),
       ],
     );
     showDialog(
-        context: context,
-        builder: (BuildContext context) {
+        context: Alertcontext,
+        builder: (BuildContext Alertcontext) {
           return alertDialog;
         });
   }
@@ -95,23 +77,61 @@ class AnswerTile extends StatelessWidget {
                             fit: BoxFit.fitHeight,
                           ),
                         ),
-                        trailing: currentUser.BitsId == answer.BitsId
+                        trailing: currentUser.BitsId == widget.answer.BitsId
                             ? IconButton(
                                 onPressed: () async {
-                                  await alertDialogResult(
-                                      context, answername, currentUser, user);
+                                  //await alertDialogResult(
+                                    //  context, answername, currentUser, user);
+                                  //if (deleteAnswer == true) {
+                                    if (widget.answer.answer.length >= 1000) {
+                                      answername = widget.answer.answer
+                                          .substring(0, 1000);
+                                    } else {
+                                      answername = widget.answer.answer;
+                                    }
+                                    answername =
+                                        await answername.replaceAll("/", "_");
+                                    await FirebaseFirestore.instance
+                                        .collection('questions')
+                                        .doc(widget.question)
+                                        .collection('answers')
+                                        .doc(answername)
+                                        .delete();
+
+                                    await DatabaseService(uid: user.uid)
+                                        .updateUserProfile(
+                                            firstname: currentUser.firstname,
+                                            secondname: currentUser.secondname,
+                                            instagramId:
+                                                currentUser.instagramId,
+                                            aboutMe: currentUser.aboutMe,
+                                            degreeIn: currentUser.degreeIn,
+                                            BitsId: currentUser.BitsId,
+                                            graduationYear:
+                                                currentUser.graduationYear,
+                                            hostelName: currentUser.hostelName,
+                                            whatsappNumber:
+                                                currentUser.whatsappNumber,
+                                            profilePic: currentUser.profilePic,
+                                            firstLogin: false,
+                                            emailId: currentUser.emailId,
+                                            numberOfPosts:
+                                                currentUser.numberOfPosts - 1);
+                                    
+                                  //}
                                 },
                                 icon: Icon(Icons.delete),
                               )
                             : null,
-                        title: Text('Answered by ${answer.name}'),
-                        subtitle: Text('On ${answer.date.substring(0, 10)}'),
+                        title: Text('Answered by ${widget.answer.name}'),
+                        subtitle:
+                            Text('On ${widget.answer.date.substring(0, 10)}'),
                       ),
                       Container(
                         margin: EdgeInsets.all(10),
                         child: Text(
                           //this will contain the answer
-                          answer.answer,
+                          widget.answer.answer,
                           style: TextStyle(fontSize: 18),
                         ),
                       ),
