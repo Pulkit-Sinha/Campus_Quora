@@ -16,6 +16,33 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
+  alertdialog(BuildContext context, AuthService auth) {
+    var alertDialog = AlertDialog(
+      title: Text('Confirm'),
+      content: Text('Do you want to Log Out?'),
+      actions: [
+        ElevatedButton(
+          onPressed: () {
+            Navigator.of(context).pop();
+          },
+          child: Text('No'),
+          
+        ),
+        ElevatedButton(
+            onPressed: () async {
+              await auth.signOut();
+              Navigator.of(context).pop();
+            },
+            child: Text('Yes'))
+      ],
+    );
+    showDialog(
+        context: context,
+        builder: (BuildContext context) {
+          return alertDialog;
+        });
+  }
+
   AuthService _auth = AuthService();
   @override
   Widget build(BuildContext context) {
@@ -30,8 +57,8 @@ class _HomePageState extends State<HomePage> {
                 context: context,
                 builder: (context) {
                   return Container(
-                    padding: EdgeInsets.symmetric(vertical: 20,horizontal: 60),
-                    child:AskQuestion(),
+                    padding: EdgeInsets.symmetric(vertical: 20, horizontal: 60),
+                    child: AskQuestion(),
                   );
                 });
           },
@@ -49,7 +76,7 @@ class _HomePageState extends State<HomePage> {
         appBar: AppBar(title: Text('Home Page'), actions: [
           TextButton(
             onPressed: () {
-              _auth.signOut();
+              alertdialog(context, _auth);
             },
             child: Row(
               children: [
@@ -69,7 +96,7 @@ class _HomePageState extends State<HomePage> {
           ),
         ]),
         //body will contain the list of questions ..on tapping each question user can see the option to answer the question and see the previous replies.
-    
+
         body: QuestionList(),
       ),
     );

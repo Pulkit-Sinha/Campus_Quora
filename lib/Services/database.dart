@@ -52,7 +52,7 @@ class DatabaseService {
     });
   }
 
-  Future updateAnswer(String question, String answername,String answer,String name,String date,String image) async {
+  Future updateAnswer(String question, String answername,String answer,String name,String date,String image,String BitsId) async {
     return await questionCollection
         .doc(question)
         .collection('answers')
@@ -62,6 +62,7 @@ class DatabaseService {
       'name':name,
       'date':date,
       'image':image,
+      'BitsId':BitsId,
     });
   }
 
@@ -97,7 +98,7 @@ class DatabaseService {
 
   List<Answer> _answerListFromSnapshot(QuerySnapshot snapshot) {
     return snapshot.docs.map((e) {
-      return Answer(answer: e.get('answer') ?? "",name: e.get('name')??"",date: e.get('date')??"",image: e.get('image'));
+      return Answer(answer: e.get('answer') ?? "",name: e.get('name')??"",date: e.get('date')??"",image: e.get('image'),BitsId: e.get('BitsId'));
     }).toList();
   }
   Stream<List<Answer>> getAnswers(String question){

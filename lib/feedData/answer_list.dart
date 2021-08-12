@@ -73,7 +73,7 @@ class _AnswerListState extends State<AnswerList> {
                               child: ListView.builder(
                                 shrinkWrap: true,
                                 itemBuilder: (context, index) {
-                                  return AnswerTile(answer: answers[index]);
+                                  return AnswerTile(answer: answers[index],question: widget.question,);
                                 },
                                 itemCount: answers.length,
                               ),

@@ -78,6 +78,7 @@ class _AnswerPageState extends State<AnswerPage> {
                                     userr!.firstname,
                                     DateTime.now().toString(),
                                     userr.profilePic,
+                                    userr.BitsId,
                                   );
                                   await DatabaseService(uid: user.uid)
                                       .updateUserProfile(

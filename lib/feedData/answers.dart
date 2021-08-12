@@ -3,5 +3,11 @@ class Answer {
   final String name;
   final String date;
   final String image;
-  Answer({required this.answer,required this.name,required this.date,required this.image});
+  final String BitsId;
+  Answer(
+      {required this.answer,
+      required this.name,
+      required this.date,
+      required this.image,
+      required this.BitsId});
 }
