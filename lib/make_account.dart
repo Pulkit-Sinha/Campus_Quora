@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:log_in/Pranav/data/profile.dart';
 import 'package:log_in/Services/auth.dart';
 import 'package:log_in/Services/database.dart';
+import 'package:log_in/authenticate/authenticate.dart';
+import 'package:log_in/authenticate/register.dart';
 import 'package:provider/provider.dart';
 
 class MakeAccount extends StatefulWidget {
@@ -314,26 +316,37 @@ class _MakeAccountState extends State<MakeAccount> {
                   },
                 ),
                 SizedBox(height: 10),
-                ElevatedButton(
-                    onPressed: () async {
-                      if (_formKey.currentState!.validate()) {
-                        await DatabaseService(uid: user!.uid).updateUserProfile(
-                            firstname: firstname,
-                            secondname: secondname,
-                            instagramId: instagramId,
-                            aboutMe: aboutMe,
-                            degreeIn: degreeIn,
-                            BitsId: BitsId,
-                            graduationYear: graduationYear,
-                            hostelName: hostelName,
-                            whatsappNumber: whatsappNumber,
-                            profilePic: profilePic,
-                            firstLogin: false,
-                            emailId: emailId,
-                            numberOfPosts: 0);
-                      }
-                    },
-                    child: Text('Make Account')),
+                Row(
+                  children: [
+                    ElevatedButton(
+                      onPressed: () {
+                        null;
+                      },
+                      child: Text('Cancel')),
+                    Flexible(child: SizedBox(),
+                    fit: FlexFit.tight,),
+                    ElevatedButton(
+                        onPressed: () async {
+                          if (_formKey.currentState!.validate()) {
+                            await DatabaseService(uid: user!.uid).updateUserProfile(
+                                firstname: firstname,
+                                secondname: secondname,
+                                instagramId: instagramId,
+                                aboutMe: aboutMe,
+                                degreeIn: degreeIn,
+                                BitsId: BitsId,
+                                graduationYear: graduationYear,
+                                hostelName: hostelName,
+                                whatsappNumber: whatsappNumber,
+                                profilePic: profilePic,
+                                firstLogin: false,
+                                emailId: emailId,
+                                numberOfPosts: 0);
+                          }
+                        },
+                        child: Text('Make Account')),
+                  ],
+                ),
               ],
             ),
           ),
