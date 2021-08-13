@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:log_in/Pranav/data/profile.dart';
 import 'package:log_in/Services/auth.dart';
 import 'package:log_in/Services/database.dart';
@@ -26,7 +25,7 @@ class _HomePageState extends State<HomePage> {
             Navigator.of(context).pop();
           },
           child: Text('No'),
-          
+
         ),
         ElevatedButton(
             onPressed: () async {

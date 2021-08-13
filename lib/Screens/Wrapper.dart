@@ -24,7 +24,7 @@ class _WrapperState extends State<Wrapper> {
     var data = snapshot.data() as Map;
     return data['firstLogin'];
   }
-  bool screen = false;
+  var screen = 0;
 
   @override
   Widget build(BuildContext context) {
@@ -35,16 +35,27 @@ class _WrapperState extends State<Wrapper> {
     } else {
       Future<bool> isFirstLogin = FirstLogin(user);
 
-      isFirstLogin.whenComplete(() {
-        setState(() {
-          isFirstLogin.then((value) => screen = value);
+        isFirstLogin.whenComplete(() {
+          setState(() {
+            isFirstLogin.then((value) => {
+              if(value){
+                screen = 1,
+              }
+              else{
+                screen = 2,
+            }
+            });
+          });
         });
-      });
-      if (screen) {
+
+      if (screen == 1) {
         return MakeAccount();
-      } else {
+      } else if(screen == 2){
         return NavigationPage();
+      } else{
+        return Loading();
       }
+
 
       //return Loading();
     }

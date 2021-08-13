@@ -50,88 +50,94 @@ class _RegisterState extends State<Register> {
                     ),
                   )
                 ]),
-            body: Container(
-                padding: EdgeInsets.symmetric(vertical: 20, horizontal: 50),
-                child: Form(
-                    key: _formKey,
-                    child: Column(
-                      children: [
-                        SizedBox(
-                          height: 20,
-                        ),
-                        TextFormField(
-                          validator: (val) =>
-                              val!.isEmpty ? 'Enter an email' : null,
-                          decoration:
-                              textInputDecoration.copyWith(hintText: 'Email'),
-                          onChanged: (val) {
-                            setState(() {
-                              email = val;
-                            });
-                          },
-                        ),
-                        SizedBox(
-                          height: 20,
-                        ),
-                        TextFormField(
-                          validator: (val) => val!.length < 6
-                              ? 'Password must have atleast 6 characters'
-                              : null,
-                          obscureText: obsecurePassword,
-                          decoration: textInputDecoration.copyWith(
-                            hintText: 'Password',
-                            suffixIcon: IconButton(
-                                onPressed: () {
+            body: SingleChildScrollView(
+              child: Column(
+                children: [
+                  Container(
+                      padding: EdgeInsets.symmetric(vertical: 20, horizontal: 50),
+                      child: Form(
+                          key: _formKey,
+                          child: Column(
+                            children: [
+                              SizedBox(
+                                height: 20,
+                              ),
+                              TextFormField(
+                                validator: (val) =>
+                                    val!.isEmpty ? 'Enter an email' : null,
+                                decoration:
+                                    textInputDecoration.copyWith(hintText: 'Email'),
+                                onChanged: (val) {
                                   setState(() {
-                                    obsecurePassword = !obsecurePassword;
+                                    email = val;
                                   });
                                 },
-                                icon: Icon(Icons.lock)),
-                          ),
-                          onChanged: (val) {
-                            password = val;
-                          },
-                        ),
-                        SizedBox(
-                          height: 20,
-                        ),
-                        ElevatedButton(
-                          onPressed: () async {
-                            if (_formKey.currentState!.validate()) {
-                              //validate goes to each function in the text field and if it gets null from all validate function only then the form is validate.
-                              //if validate doesnt recieve null then the returned string will appear as helper text.
+                              ),
+                              SizedBox(
+                                height: 20,
+                              ),
+                              TextFormField(
+                                validator: (val) => val!.length < 6
+                                    ? 'Password must have atleast 6 characters'
+                                    : null,
+                                obscureText: obsecurePassword,
+                                decoration: textInputDecoration.copyWith(
+                                  hintText: 'Password',
+                                  suffixIcon: IconButton(
+                                      onPressed: () {
+                                        setState(() {
+                                          obsecurePassword = !obsecurePassword;
+                                        });
+                                      },
+                                      icon: Icon(Icons.lock)),
+                                ),
+                                onChanged: (val) {
+                                  password = val;
+                                },
+                              ),
+                              SizedBox(
+                                height: 20,
+                              ),
+                              ElevatedButton(
+                                onPressed: () async {
+                                  if (_formKey.currentState!.validate()) {
+                                    //validate goes to each function in the text field and if it gets null from all validate function only then the form is validate.
+                                    //if validate doesnt recieve null then the returned string will appear as helper text.
 
-                              setState(() {
-                                loading = true;
-                              });
-                              dynamic result =
-                                  await _auth.registerWithEmailAndPassword(
-                                      email, password);
-                              if (result == null) {
-                                setState(() {
-                                  error = 'please supply valid email';
-                                  loading = false;
-                                });
-                              }
-                              //if user gets a succesful result then automatically they will be redirected to home page bcz we already have setup the authchange method.
-                            }
-                          },
-                          child: Text(
-                            'Register',
-                            style: TextStyle(color: Colors.white),
-                          ),
-                          style: ElevatedButton.styleFrom(
-                              primary: Colors.pink[400]),
-                        ),
-                        SizedBox(
-                          height: 12,
-                        ),
-                        Text(
-                          error,
-                          style: TextStyle(color: Colors.red, fontSize: 14.0),
-                        )
-                      ],
-                    ))),
+                                    setState(() {
+                                      loading = true;
+                                    });
+                                    dynamic result =
+                                        await _auth.registerWithEmailAndPassword(
+                                            email, password);
+                                    if (result == null) {
+                                      setState(() {
+                                        error = 'please supply valid email';
+                                        loading = false;
+                                      });
+                                    }
+                                    //if user gets a succesful result then automatically they will be redirected to home page bcz we already have setup the authchange method.
+                                  }
+                                },
+                                child: Text(
+                                  'Register',
+                                  style: TextStyle(color: Colors.white),
+                                ),
+                                style: ElevatedButton.styleFrom(
+                                    primary: Colors.pink[400]),
+                              ),
+                              SizedBox(
+                                height: 12,
+                              ),
+                              Text(
+                                error,
+                                style: TextStyle(color: Colors.red, fontSize: 14.0),
+                              )
+                            ],
+                          ))),
+                ],
+              ),
+            ),
           );
   }
 }
