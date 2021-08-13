@@ -331,11 +331,7 @@ class _MakeAccountState extends State<MakeAccount> {
                   children: [
                     ElevatedButton(
                         onPressed: () async {
-                          try {
-                            await FirebaseAuth.instance.currentUser!.delete();
-                          } catch (e) {
-                            FirebaseAuth.instance.signOut();
-                          }
+                          await alertDialog(context);
                         },
                         child: Text('Cancel')),
                     Flexible(
@@ -371,5 +367,34 @@ class _MakeAccountState extends State<MakeAccount> {
         ),
       ),
     );
+  }
+
+  alertDialog(BuildContext context) {
+    showDialog(
+        context: context,
+        builder: (BuildContext context) {
+          return AlertDialog(
+              title: Text('Confirm'),
+              content: Text(
+                  'The account will be deleted along with all the changes made'),
+              actions: [
+                ElevatedButton(
+                    onPressed: () {
+                      Navigator.pop(context, 'Cancel');
+                    },
+                    child: Text('Cancel')),
+                ElevatedButton(
+                  onPressed: () async {
+                    try {
+                      await FirebaseAuth.instance.currentUser!.delete();
+                    } catch (e) {
+                      FirebaseAuth.instance.signOut();
+                    }
+                    Navigator.pop(context, 'Confirm');
+                  },
+                  child: Text('Confirm'),
+                )
+              ]);
+        });
   }
 }
