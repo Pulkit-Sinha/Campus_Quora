@@ -22,29 +22,52 @@ class _AnswerTileState extends State<AnswerTile> {
 
   alertDialogResult(BuildContext Alertcontext, String answername,
       UserProfile currentUser, Profile user) {
-    var alertDialog = AlertDialog(
-      title: Text('Confirm Delete'),
-      content: Text('Do you want to delete this answer?'),
-      actions: [
-        ElevatedButton(
-            onPressed: () {
-              Navigator.pop(Alertcontext, 'No');
-            },
-            child: Text('No')),
-        ElevatedButton(
-            onPressed: () async {
-              setState(() {
-                deleteAnswer = true;
-              });
-              Navigator.pop(Alertcontext, 'Yes');
-            },
-            child: Text('Yes')),
-      ],
-    );
     showDialog(
         context: Alertcontext,
-        builder: (BuildContext Alertcontext) {
-          return alertDialog;
+        builder: (BuildContext context) {
+          return AlertDialog(
+            title: Text('Confirm Delete'),
+            content: Text('Do you want to delete this answer?'),
+            actions: [
+              ElevatedButton(
+                  onPressed: () {
+                    Navigator.pop(context, 'No');
+                  },
+                  child: Text('No')),
+              ElevatedButton(
+                  onPressed: () async {
+                    if (widget.answer.answer.length >= 1000) {
+                      answername = widget.answer.answer.substring(0, 1000);
+                    } else {
+                      answername = widget.answer.answer;
+                    }
+                    answername = await answername.replaceAll("/", "_");
+                    await FirebaseFirestore.instance
+                        .collection('questions')
+                        .doc(widget.question)
+                        .collection('answers')
+                        .doc(answername)
+                        .delete();
+
+                    await DatabaseService(uid: user.uid).updateUserProfile(
+                        firstname: currentUser.firstname,
+                        secondname: currentUser.secondname,
+                        instagramId: currentUser.instagramId,
+                        aboutMe: currentUser.aboutMe,
+                        degreeIn: currentUser.degreeIn,
+                        BitsId: currentUser.BitsId,
+                        graduationYear: currentUser.graduationYear,
+                        hostelName: currentUser.hostelName,
+                        whatsappNumber: currentUser.whatsappNumber,
+                        profilePic: currentUser.profilePic,
+                        firstLogin: false,
+                        emailId: currentUser.emailId,
+                        numberOfPosts: currentUser.numberOfPosts - 1);
+                    Navigator.pop(context, 'Yes');
+                  },
+                  child: Text('Yes')),
+            ],
+          );
         });
   }
 
@@ -80,44 +103,9 @@ class _AnswerTileState extends State<AnswerTile> {
                         trailing: currentUser.BitsId == widget.answer.BitsId
                             ? IconButton(
                                 onPressed: () async {
-                                  //await alertDialogResult(
-                                    //  context, answername, currentUser, user);
-                                  //if (deleteAnswer == true) {
-                                    if (widget.answer.answer.length >= 1000) {
-                                      answername = widget.answer.answer
-                                          .substring(0, 1000);
-                                    } else {
-                                      answername = widget.answer.answer;
-                                    }
-                                    answername =
-                                        await answername.replaceAll("/", "_");
-                                    await FirebaseFirestore.instance
-                                        .collection('questions')
-                                        .doc(widget.question)
-                                        .collection('answers')
-                                        .doc(answername)
-                                        .delete();
+                                  await alertDialogResult(
+                                      context, answername, currentUser, user);
 
-                                    await DatabaseService(uid: user.uid)
-                                        .updateUserProfile(
-                                            firstname: currentUser.firstname,
-                                            secondname: currentUser.secondname,
-                                            instagramId:
-                                                currentUser.instagramId,
-                                            aboutMe: currentUser.aboutMe,
-                                            degreeIn: currentUser.degreeIn,
-                                            BitsId: currentUser.BitsId,
-                                            graduationYear:
-                                                currentUser.graduationYear,
-                                            hostelName: currentUser.hostelName,
-                                            whatsappNumber:
-                                                currentUser.whatsappNumber,
-                                            profilePic: currentUser.profilePic,
-                                            firstLogin: false,
-                                            emailId: currentUser.emailId,
-                                            numberOfPosts:
-                                                currentUser.numberOfPosts - 1);
-                                    
                                   //}
                                 },
                                 icon: Icon(Icons.delete),
