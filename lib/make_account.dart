@@ -1,3 +1,5 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:log_in/Pranav/data/profile.dart';
 import 'package:log_in/Services/auth.dart';
@@ -146,8 +148,12 @@ class _MakeAccountState extends State<MakeAccount> {
                         //degreeIn = newValue;
                       });
                     },
-                    items: ['Type of Degree','First Degree', 'Higher Degree', 'PhD']
-                        .map<DropdownMenuItem<String>>((String value) {
+                    items: [
+                      'Type of Degree',
+                      'First Degree',
+                      'Higher Degree',
+                      'PhD'
+                    ].map<DropdownMenuItem<String>>((String value) {
                       return DropdownMenuItem<String>(
                         value: value,
                         child: Text(value),
@@ -181,7 +187,7 @@ class _MakeAccountState extends State<MakeAccount> {
                         dropdowngenderValue = newValue!;
                       });
                     },
-                    items: ['Gender','Male', 'Female', 'Other']
+                    items: ['Gender', 'Male', 'Female', 'Other']
                         .map<DropdownMenuItem<String>>((String value) {
                       return DropdownMenuItem<String>(
                         value: value,
@@ -199,10 +205,8 @@ class _MakeAccountState extends State<MakeAccount> {
                   ),
                 ),
                 Container(
-                  
                   width: double.infinity,
                   child: DropdownButtonFormField(
-                    
                     value: dropdownbranchValue,
                     icon: const Icon(Icons.arrow_downward),
                     iconSize: 24,
@@ -219,8 +223,15 @@ class _MakeAccountState extends State<MakeAccount> {
                         degreeIn = newValue;
                       });
                     },
-                    items: ['Branch','CSE', 'EEE', 'ME', 'Chem.', 'Civil', 'B.Pharm']
-                        .map<DropdownMenuItem<String>>((String value) {
+                    items: [
+                      'Branch',
+                      'CSE',
+                      'EEE',
+                      'ME',
+                      'Chem.',
+                      'Civil',
+                      'B.Pharm'
+                    ].map<DropdownMenuItem<String>>((String value) {
                       return DropdownMenuItem<String>(
                         value: value,
                         child: Text(value),
@@ -319,29 +330,36 @@ class _MakeAccountState extends State<MakeAccount> {
                 Row(
                   children: [
                     ElevatedButton(
-                      onPressed: () {
-                        null;
-                      },
-                      child: Text('Cancel')),
-                    Flexible(child: SizedBox(),
-                    fit: FlexFit.tight,),
+                        onPressed: () async {
+                          try {
+                            await FirebaseAuth.instance.currentUser!.delete();
+                          } catch (e) {
+                            FirebaseAuth.instance.signOut();
+                          }
+                        },
+                        child: Text('Cancel')),
+                    Flexible(
+                      child: SizedBox(),
+                      fit: FlexFit.tight,
+                    ),
                     ElevatedButton(
                         onPressed: () async {
                           if (_formKey.currentState!.validate()) {
-                            await DatabaseService(uid: user!.uid).updateUserProfile(
-                                firstname: firstname,
-                                secondname: secondname,
-                                instagramId: instagramId,
-                                aboutMe: aboutMe,
-                                degreeIn: degreeIn,
-                                BitsId: BitsId,
-                                graduationYear: graduationYear,
-                                hostelName: hostelName,
-                                whatsappNumber: whatsappNumber,
-                                profilePic: profilePic,
-                                firstLogin: false,
-                                emailId: emailId,
-                                numberOfPosts: 0);
+                            await DatabaseService(uid: user!.uid)
+                                .updateUserProfile(
+                                    firstname: firstname,
+                                    secondname: secondname,
+                                    instagramId: instagramId,
+                                    aboutMe: aboutMe,
+                                    degreeIn: degreeIn,
+                                    BitsId: BitsId,
+                                    graduationYear: graduationYear,
+                                    hostelName: hostelName,
+                                    whatsappNumber: whatsappNumber,
+                                    profilePic: profilePic,
+                                    firstLogin: false,
+                                    emailId: emailId,
+                                    numberOfPosts: 0);
                           }
                         },
                         child: Text('Make Account')),
