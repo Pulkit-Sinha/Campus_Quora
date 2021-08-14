@@ -28,7 +28,8 @@ class _MakeAccountState extends State<MakeAccount> {
   String aboutMe = '';
   String whatsappNumber = '';
   String instagramId = '';
-  String profilePic = 'https://t4.ftcdn.net/jpg/02/15/84/43/360_F_215844325_ttX9YiIIyeaR7Ne6EaLLjMAmy4GvPC69.jpg';
+  String profilePic =
+      'https://t4.ftcdn.net/jpg/02/15/84/43/360_F_215844325_ttX9YiIIyeaR7Ne6EaLLjMAmy4GvPC69.jpg';
   int numberOfPosts = 0;
 
   final _formKey = GlobalKey<FormState>();
@@ -61,43 +62,49 @@ class _MakeAccountState extends State<MakeAccount> {
               children: [
                 SizedBox(height: 30),
                 ClipOval(
-                          child: Image.network(
-                           profilePic,
-                            height: 150,
-                            width: 150,
-                            fit: BoxFit.fitHeight,
-                          ),
-                        ),
+                  child: Image.network(
+                    profilePic,
+                    height: 150,
+                    width: 150,
+                    fit: BoxFit.fitHeight,
+                  ),
+                ),
                 SizedBox(height: 10),
                 Text('Add image'),
                 SizedBox(
                   height: 10,
                 ),
-                DropdownButtonFormField(
-                  //value: profilePic,
-                  hint: Text('Choose an image as avatar'),
-                  icon: const Icon(Icons.arrow_downward),
-                  iconSize: 24,
-                  isExpanded: true,
-                  elevation: 16,
-                  style: const TextStyle(color: Colors.deepPurple),
-                  // underline: Container(
-                  //   height: 2,
-                  //   color: Colors.deepPurpleAccent,
-                  // ),
-                  onChanged: (String? newValue) {
-                    setState(() {
-                      profilePic = newValue!;
-                     
-                    });
-                  },
-                  items:
-                      imageList.map<DropdownMenuItem<String>>((String value) {
-                    return DropdownMenuItem<String>(
-                      value: value,
-                      child: Image.network(value),
-                    );
-                  }).toList(),
+                Container(
+                  width: 250,
+                  child: DropdownButtonFormField(
+                    value: imageList[0],
+                    hint: Text('Choose an image as avatar'),
+                    icon: const Icon(Icons.arrow_downward),
+                    iconSize: 24,
+                    isExpanded: true,
+                    elevation: 16,
+                    style: const TextStyle(color: Colors.deepPurple),
+                    // underline: Container(
+                    //   height: 2,
+                    //   color: Colors.deepPurpleAccent,
+                    // ),
+                    onChanged: (String? newValue) {
+                      setState(() {
+                        profilePic = newValue!;
+                      });
+                    },
+                    items:
+                        imageList.map<DropdownMenuItem<String>>((String value) {
+                      return DropdownMenuItem<String>(
+                        value: value,
+                        child: Image.network(
+                          value,
+                          width: 250,
+                          height: 150,
+                        ),
+                      );
+                    }).toList(),
+                  ),
                 ),
                 SizedBox(height: 30),
                 Container(

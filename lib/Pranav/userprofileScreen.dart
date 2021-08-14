@@ -37,8 +37,7 @@ class _UserProfilePageState extends State<UserProfilePage> {
                   children: [
                     Center(
                       child: CircleAvatar(
-                        backgroundImage:
-                            AssetImage('assets/images/profilepicdefault.jpg'),
+                        backgroundImage: NetworkImage(user.profilePic),
 
                         radius: heightOfScreen /
                             15, // now remaining height is height - 100
