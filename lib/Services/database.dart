@@ -46,23 +46,25 @@ class DatabaseService {
     });
   }
 
-  Future updateQuestion(String question) async {
+  Future updateQuestion(String question, String questionTag) async {
     return await questionCollection.doc(question).set({
       'question': question,
+      'questionTag': questionTag,
     });
   }
 
-  Future updateAnswer(String question, String answername,String answer,String name,String date,String image,String BitsId) async {
+  Future updateAnswer(String question, String answername, String answer,
+      String name, String date, String image, String BitsId) async {
     return await questionCollection
         .doc(question)
         .collection('answers')
         .doc(answer)
         .set({
       'answer': answer,
-      'name':name,
-      'date':date,
-      'image':image,
-      'BitsId':BitsId,
+      'name': name,
+      'date': date,
+      'image': image,
+      'BitsId': BitsId,
     });
   }
 
@@ -88,7 +90,9 @@ class DatabaseService {
 
   List<Question> _questionListFromSnapshot(QuerySnapshot snapshot) {
     return snapshot.docs.map((e) {
-      return Question(question: e.get('question') ?? "");
+      return Question(
+          question: e.get('question') ?? "",
+          questionTag: e.get('questionTag') ?? "");
     }).toList();
   }
 
@@ -98,10 +102,20 @@ class DatabaseService {
 
   List<Answer> _answerListFromSnapshot(QuerySnapshot snapshot) {
     return snapshot.docs.map((e) {
-      return Answer(answer: e.get('answer') ?? "",name: e.get('name')??"",date: e.get('date')??"",image: e.get('image'),BitsId: e.get('BitsId'));
+      return Answer(
+          answer: e.get('answer') ?? "",
+          name: e.get('name') ?? "",
+          date: e.get('date') ?? "",
+          image: e.get('image'),
+          BitsId: e.get('BitsId'));
     }).toList();
   }
-  Stream<List<Answer>> getAnswers(String question){
-    return questionCollection.doc(question).collection('answers').snapshots().map(_answerListFromSnapshot);
+
+  Stream<List<Answer>> getAnswers(String question) {
+    return questionCollection
+        .doc(question)
+        .collection('answers')
+        .snapshots()
+        .map(_answerListFromSnapshot);
   }
 }

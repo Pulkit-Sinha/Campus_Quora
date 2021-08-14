@@ -76,7 +76,8 @@ class _AskQuestionState extends State<AskQuestion> {
             ElevatedButton(
                 onPressed: () async {
                   if (_formKey.currentState!.validate()) {
-                    DatabaseService(uid: user!.uid).updateQuestion(question);
+                    DatabaseService(uid: user!.uid)
+                        .updateQuestion(question, questionTag);
                     Navigator.of(context).pop();
                   }
                 },
