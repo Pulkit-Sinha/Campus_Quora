@@ -25,6 +25,14 @@ class QuestionTile extends StatelessWidget {
                     style: TextStyle(fontSize: 18),
                   ),
                 ),
+                Container(
+                  margin: EdgeInsets.all(10),
+                  child: Text(
+                    //this will contain the question tag
+                    question.questionTag,
+                    style: TextStyle(fontSize: 10,color: Colors.purple),
+                  ),
+                ),
                 Row(
                   children: [
                     ElevatedButton.icon(
@@ -52,7 +60,8 @@ class QuestionTile extends StatelessWidget {
                         color: Colors.black,
                       ),
                       onPressed: () {
-                        Navigator.of(context).pushNamed('/answerList',arguments: question.question);
+                        Navigator.of(context).pushNamed('/answerList',
+                            arguments: question.question);
                       },
                       label: FittedBox(
                         fit: BoxFit.contain,
