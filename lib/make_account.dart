@@ -28,7 +28,7 @@ class _MakeAccountState extends State<MakeAccount> {
   String aboutMe = '';
   String whatsappNumber = '';
   String instagramId = '';
-  String profilePic = 'profilepicdefault.jpg';
+  String profilePic = 'assets/images/profilepicdefault.jpg';
   int numberOfPosts = 0;
 
   final _formKey = GlobalKey<FormState>();
@@ -37,6 +37,10 @@ class _MakeAccountState extends State<MakeAccount> {
   String dropdowngenderValue = 'Gender';
   String dropdownbranchValue = 'Branch';
   String dropdownyearValue = '2024';
+
+  List<String> imageList = [
+    'https://image.freepik.com/free-vector/man-profile-cartoon_18591-58482.jpg'
+  ];
 
   @override
   Widget build(BuildContext context) {
@@ -55,11 +59,45 @@ class _MakeAccountState extends State<MakeAccount> {
                 SizedBox(height: 30),
                 Container(
                   height: 150,
-                  decoration:
-                      BoxDecoration(shape: BoxShape.circle, color: Colors.red),
+                  decoration: BoxDecoration(
+                    shape: BoxShape.circle,
+                    image: DecorationImage(
+                        image: AssetImage(
+                          profilePic,
+                        ),
+                        fit: BoxFit.fill),
+                  ),
                 ),
                 SizedBox(height: 10),
                 Text('Add image'),
+                SizedBox(
+                  height: 10,
+                ),
+                // DropdownButtonFormField(
+                //   value: profilePic,
+                //   icon: const Icon(Icons.arrow_downward),
+                //   iconSize: 24,
+                //   isExpanded: true,
+                //   elevation: 16,
+                //   style: const TextStyle(color: Colors.deepPurple),
+                //   // underline: Container(
+                //   //   height: 2,
+                //   //   color: Colors.deepPurpleAccent,
+                //   // ),
+                //   onChanged: (String? newValue) {
+                //     setState(() {
+                //       profilePic = newValue!;
+                //       //degreeIn = newValue;
+                //     });
+                //   },
+                //   items:
+                //       imageList.map<DropdownMenuItem<String>>((String value) {
+                //     return DropdownMenuItem<String>(
+                //       value: value,
+                //       child: Image.asset(value),
+                //     );
+                //   }).toList(),
+                // ),
                 SizedBox(height: 30),
                 Container(
                   width: double.infinity,
