@@ -62,7 +62,7 @@ class _AskQuestionState extends State<AskQuestion> {
                   //degreeIn = newValue;
                 });
               },
-              items: ['Food', 'Admission', 'Culture', 'General']
+              items: ['Food', 'Admission', 'Culture', 'General', 'Academics']
                   .map<DropdownMenuItem<String>>((String value) {
                 return DropdownMenuItem<String>(
                   value: value,
@@ -76,7 +76,6 @@ class _AskQuestionState extends State<AskQuestion> {
             ElevatedButton(
                 onPressed: () async {
                   if (_formKey.currentState!.validate()) {
-                    print(question);
                     DatabaseService(uid: user!.uid).updateQuestion(question);
                     Navigator.of(context).pop();
                   }
