@@ -28,7 +28,7 @@ class _MakeAccountState extends State<MakeAccount> {
   String aboutMe = '';
   String whatsappNumber = '';
   String instagramId = '';
-  String profilePic = 'assets/images/profilepicdefault.jpg';
+  String profilePic = 'https://t4.ftcdn.net/jpg/02/15/84/43/360_F_215844325_ttX9YiIIyeaR7Ne6EaLLjMAmy4GvPC69.jpg';
   int numberOfPosts = 0;
 
   final _formKey = GlobalKey<FormState>();
@@ -39,7 +39,10 @@ class _MakeAccountState extends State<MakeAccount> {
   String dropdownyearValue = '2024';
 
   List<String> imageList = [
-    'https://image.freepik.com/free-vector/man-profile-cartoon_18591-58482.jpg'
+    'https://t4.ftcdn.net/jpg/02/15/84/43/360_F_215844325_ttX9YiIIyeaR7Ne6EaLLjMAmy4GvPC69.jpg',
+    'https://image.freepik.com/free-vector/man-profile-cartoon_18591-58482.jpg',
+    'https://pbs.twimg.com/profile_images/1252530714098237440/aY3WYZOH_400x400.jpg',
+    'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT8FQDTf2WX-mXb_PD0UQl65Xfp3mSvFOrLbA&usqp=CAU',
   ];
 
   @override
@@ -57,47 +60,45 @@ class _MakeAccountState extends State<MakeAccount> {
             child: Column(
               children: [
                 SizedBox(height: 30),
-                Container(
-                  height: 150,
-                  decoration: BoxDecoration(
-                    shape: BoxShape.circle,
-                    image: DecorationImage(
-                        image: AssetImage(
-                          profilePic,
+                ClipOval(
+                          child: Image.network(
+                           profilePic,
+                            height: 150,
+                            width: 150,
+                            fit: BoxFit.fitHeight,
+                          ),
                         ),
-                        fit: BoxFit.fill),
-                  ),
-                ),
                 SizedBox(height: 10),
                 Text('Add image'),
                 SizedBox(
                   height: 10,
                 ),
-                // DropdownButtonFormField(
-                //   value: profilePic,
-                //   icon: const Icon(Icons.arrow_downward),
-                //   iconSize: 24,
-                //   isExpanded: true,
-                //   elevation: 16,
-                //   style: const TextStyle(color: Colors.deepPurple),
-                //   // underline: Container(
-                //   //   height: 2,
-                //   //   color: Colors.deepPurpleAccent,
-                //   // ),
-                //   onChanged: (String? newValue) {
-                //     setState(() {
-                //       profilePic = newValue!;
-                //       //degreeIn = newValue;
-                //     });
-                //   },
-                //   items:
-                //       imageList.map<DropdownMenuItem<String>>((String value) {
-                //     return DropdownMenuItem<String>(
-                //       value: value,
-                //       child: Image.asset(value),
-                //     );
-                //   }).toList(),
-                // ),
+                DropdownButtonFormField(
+                  //value: profilePic,
+                  hint: Text('Choose an image as avatar'),
+                  icon: const Icon(Icons.arrow_downward),
+                  iconSize: 24,
+                  isExpanded: true,
+                  elevation: 16,
+                  style: const TextStyle(color: Colors.deepPurple),
+                  // underline: Container(
+                  //   height: 2,
+                  //   color: Colors.deepPurpleAccent,
+                  // ),
+                  onChanged: (String? newValue) {
+                    setState(() {
+                      profilePic = newValue!;
+                     
+                    });
+                  },
+                  items:
+                      imageList.map<DropdownMenuItem<String>>((String value) {
+                    return DropdownMenuItem<String>(
+                      value: value,
+                      child: Image.network(value),
+                    );
+                  }).toList(),
+                ),
                 SizedBox(height: 30),
                 Container(
                   width: double.infinity,
