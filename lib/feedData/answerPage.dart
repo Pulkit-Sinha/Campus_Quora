@@ -1,11 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:log_in/Pranav/data/profile.dart';
 import 'package:log_in/Services/database.dart';
+import 'package:log_in/feedData/question.dart';
 import 'package:log_in/shared/constants.dart';
 import 'package:provider/provider.dart';
 
 class AnswerPage extends StatefulWidget {
-  String question;
+  Question question;
   AnswerPage({required this.question});
 
   @override
@@ -38,7 +39,7 @@ class _AnswerPageState extends State<AnswerPage> {
                 child: Column(
                   children: [
                     Text(
-                      'Question : ${widget.question}',
+                      'Question : ${widget.question.question}',
                       style: TextStyle(fontSize: 20),
                     ),
                     SizedBox(
@@ -72,13 +73,14 @@ class _AnswerPageState extends State<AnswerPage> {
                                       await answername.replaceAll("/", "_");
                                   await DatabaseService(uid: user.uid)
                                       .updateAnswer(
-                                    widget.question,
+                                    widget.question.question,
                                     answername,
                                     answer,
                                     userr!.firstname,
                                     DateTime.now().toString(),
                                     userr.profilePic,
                                     userr.BitsId,
+                                    user.uid,
                                   );
                                   await DatabaseService(uid: user.uid)
                                       .updateUserProfile(
@@ -96,6 +98,12 @@ class _AnswerPageState extends State<AnswerPage> {
                                           emailId: userr.emailId,
                                           numberOfPosts:
                                               userr.numberOfPosts + 1);
+                                  await DatabaseService(uid: user.uid)
+                                      .updateUserAnswers(
+                                          widget.question.question,
+                                          answer,
+                                          answername,
+                                          widget.question.questionTag);
                                   Navigator.of(context).pop();
                                 }
                               },

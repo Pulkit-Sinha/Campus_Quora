@@ -1,6 +1,5 @@
-
-
-class Question{
+class Question {
   final String question;
-  Question({required this.question});
+  final String questionTag;
+  Question({required this.question, required this.questionTag});
 }

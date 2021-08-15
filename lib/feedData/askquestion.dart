@@ -12,6 +12,7 @@ class AskQuestion extends StatefulWidget {
 class _AskQuestionState extends State<AskQuestion> {
   final _formKey = GlobalKey<FormState>();
   String question = '';
+  String questionTag = '';
   @override
   Widget build(BuildContext context) {
     final user = Provider.of<Profile?>(context);
@@ -41,11 +42,42 @@ class _AskQuestionState extends State<AskQuestion> {
             SizedBox(
               height: 20,
             ),
+            DropdownButtonFormField(
+              // value: [],
+              icon: const Icon(Icons.arrow_downward),
+              iconSize: 24,
+              isExpanded: true,
+              elevation: 16,
+              style: const TextStyle(color: Colors.deepPurple),
+              validator: (val) =>
+                  val == null ? "Please mention type of question" : null,
+              hint: Text("Type of Question"),
+              // underline: Container(
+              //   height: 2,
+              //   color: Colors.deepPurpleAccent,
+              // ),
+              onChanged: (Object? newValue) {
+                setState(() {
+                  questionTag = newValue!.toString();
+                  //degreeIn = newValue;
+                });
+              },
+              items: ['Food', 'Admission', 'Culture', 'General', 'Academics']
+                  .map<DropdownMenuItem<String>>((String value) {
+                return DropdownMenuItem<String>(
+                  value: value,
+                  child: Text(value),
+                );
+              }).toList(),
+            ),
+            SizedBox(
+              height: 10,
+            ),
             ElevatedButton(
                 onPressed: () async {
                   if (_formKey.currentState!.validate()) {
-                    print(question);
-                    DatabaseService(uid: user!.uid).updateQuestion(question);
+                    DatabaseService(uid: user!.uid)
+                        .updateQuestion(question, questionTag);
                     Navigator.of(context).pop();
                   }
                 },

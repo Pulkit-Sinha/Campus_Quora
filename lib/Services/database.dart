@@ -2,6 +2,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:log_in/Pranav/data/profile.dart';
 import 'package:log_in/feedData/answers.dart';
 import 'package:log_in/feedData/question.dart';
+import 'package:log_in/feedData/userAnwer.dart';
 
 class DatabaseService {
   String uid;
@@ -14,6 +15,8 @@ class DatabaseService {
       FirebaseFirestore.instance.collection('questions');
   final CollectionReference answersCollection =
       FirebaseFirestore.instance.collection('answers');
+  final CollectionReference userAnswerCollection =
+      FirebaseFirestore.instance.collection('userAnswers');
 
   Future updateUserProfile(
       {required String firstname,
@@ -46,23 +49,35 @@ class DatabaseService {
     });
   }
 
-  Future updateQuestion(String question) async {
+  Future updateQuestion(String question, String questionTag) async {
     return await questionCollection.doc(question).set({
       'question': question,
+      'questionTag': questionTag,
     });
   }
 
-  Future updateAnswer(String question, String answername,String answer,String name,String date,String image,String BitsId) async {
+  Future updateUserAnswers(String question, String answer, String answername,
+      String questionTag) async {
+    return await userDataCollection.doc(uid).collection('userAnswers').doc(answername).set({
+      'question': question,
+      'questionTag': questionTag,
+      'answer': answer,
+    });
+  }
+
+  Future updateAnswer(String question, String answername, String answer,
+      String name, String date, String image, String BitsId, String uid) async {
     return await questionCollection
         .doc(question)
         .collection('answers')
-        .doc(answer)
+        .doc(answername)
         .set({
       'answer': answer,
-      'name':name,
-      'date':date,
-      'image':image,
-      'BitsId':BitsId,
+      'name': name,
+      'date': date,
+      'image': image,
+      'BitsId': BitsId,
+      'uid': uid,
     });
   }
 
@@ -88,7 +103,9 @@ class DatabaseService {
 
   List<Question> _questionListFromSnapshot(QuerySnapshot snapshot) {
     return snapshot.docs.map((e) {
-      return Question(question: e.get('question') ?? "");
+      return Question(
+          question: e.get('question') ?? "",
+          questionTag: e.get('questionTag') ?? "");
     }).toList();
   }
 
@@ -98,10 +115,38 @@ class DatabaseService {
 
   List<Answer> _answerListFromSnapshot(QuerySnapshot snapshot) {
     return snapshot.docs.map((e) {
-      return Answer(answer: e.get('answer') ?? "",name: e.get('name')??"",date: e.get('date')??"",image: e.get('image'),BitsId: e.get('BitsId'));
+      return Answer(
+          answer: e.get('answer') ?? "",
+          name: e.get('name') ?? "",
+          date: e.get('date') ?? "",
+          image: e.get('image'),
+          BitsId: e.get('BitsId'),
+          uid: e.get('uid'));
     }).toList();
   }
-  Stream<List<Answer>> getAnswers(String question){
-    return questionCollection.doc(question).collection('answers').snapshots().map(_answerListFromSnapshot);
+
+  Stream<List<Answer>> getAnswers(String question) {
+    return questionCollection
+        .doc(question)
+        .collection('answers')
+        .snapshots()
+        .map(_answerListFromSnapshot);
+  }
+
+  List<UserAnswers> _userAnswerListFromSnapshot(QuerySnapshot snapshot) {
+    return snapshot.docs.map((e) {
+      return UserAnswers(
+          question: e.get('question'),
+          answer: e.get('answer'),
+          questionTag: e.get('questionTag'));
+    }).toList();
+  }
+
+  Stream<List<UserAnswers>> get userAnswersList  {
+    return userDataCollection
+        .doc(uid)
+        .collection('userAnswers')
+        .snapshots()
+        .map(_userAnswerListFromSnapshot);
   }
 }

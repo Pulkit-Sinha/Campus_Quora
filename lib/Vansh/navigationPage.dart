@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:log_in/Pranav/HomePage.dart';
+import 'package:log_in/Pranav/data/profile.dart';
 import 'package:log_in/Pranav/userprofileScreen.dart';
+import 'package:provider/provider.dart';
 
 class NavigationPage extends StatefulWidget {
   @override
@@ -9,20 +11,7 @@ class NavigationPage extends StatefulWidget {
 
 class _NavigationPageState extends State<NavigationPage> {
   PageController _pageController = PageController();
-  List<Widget> _screens = [
-    HomePage(),
-    UserProfilePage(),
-    Scaffold(
-      appBar: AppBar(
-        title: Text('Notifications'),
-      ),
-    ),
-    Scaffold(
-      appBar: AppBar(
-        title: Text('Following'),
-      ),
-    ),
-  ];
+  
   int _selectedIndex = 0;
   void _onPageChanged(int index) {
     setState(() {
@@ -36,6 +25,21 @@ class _NavigationPageState extends State<NavigationPage> {
 
   @override
   Widget build(BuildContext context) {
+    final user = Provider.of<Profile?>(context);
+    List<Widget> _screens = [
+    HomePage(),
+    UserProfilePage(useruid: user!.uid,),
+    Scaffold(
+      appBar: AppBar(
+        title: Text('Notifications'),
+      ),
+    ),
+    Scaffold(
+      appBar: AppBar(
+        title: Text('Following'),
+      ),
+    ),
+  ];
     return Scaffold(
       // appBar: AppBar(
       //   actions: [

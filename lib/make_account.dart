@@ -1,3 +1,5 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:log_in/Pranav/data/profile.dart';
 import 'package:log_in/Services/auth.dart';
@@ -26,7 +28,8 @@ class _MakeAccountState extends State<MakeAccount> {
   String aboutMe = '';
   String whatsappNumber = '';
   String instagramId = '';
-  String profilePic = 'profilepicdefault.jpg';
+  String profilePic =
+      'https://t4.ftcdn.net/jpg/02/15/84/43/360_F_215844325_ttX9YiIIyeaR7Ne6EaLLjMAmy4GvPC69.jpg';
   int numberOfPosts = 0;
 
   final _formKey = GlobalKey<FormState>();
@@ -35,6 +38,13 @@ class _MakeAccountState extends State<MakeAccount> {
   String dropdowngenderValue = 'Gender';
   String dropdownbranchValue = 'Branch';
   String dropdownyearValue = '2024';
+
+  List<String> imageList = [
+    'https://t4.ftcdn.net/jpg/02/15/84/43/360_F_215844325_ttX9YiIIyeaR7Ne6EaLLjMAmy4GvPC69.jpg',
+    'https://image.freepik.com/free-vector/man-profile-cartoon_18591-58482.jpg',
+    'https://pbs.twimg.com/profile_images/1252530714098237440/aY3WYZOH_400x400.jpg',
+    'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT8FQDTf2WX-mXb_PD0UQl65Xfp3mSvFOrLbA&usqp=CAU',
+  ];
 
   @override
   Widget build(BuildContext context) {
@@ -50,33 +60,58 @@ class _MakeAccountState extends State<MakeAccount> {
             key: _formKey,
             child: Column(
               children: [
-                SizedBox(height: 15),
-                Container(
-                  height: 150,
-                  decoration:
-                      BoxDecoration(shape: BoxShape.circle),
-                  child: TextButton(
-                    child: Icon(
-                      Icons.account_circle,
-                      size: 155,
-                      color: Theme.of(context).primaryColor),
-                    onPressed: null,
+                SizedBox(height: 30),
+                ClipOval(
+                  child: Image.network(
+                    profilePic,
+                    height: 150,
+                    width: 150,
+                    fit: BoxFit.fitHeight,
                   ),
                 ),
                 SizedBox(height: 10),
-                Text('Add image',
-                style: TextStyle(
-                  fontSize: 18
-                ),),
+                Text('Add image'),
+                SizedBox(
+                  height: 10,
+                ),
+                Container(
+                  width: 250,
+                  child: DropdownButtonFormField(
+                    value: imageList[0],
+                    hint: Text('Choose an image as avatar'),
+                    icon: const Icon(Icons.arrow_downward),
+                    iconSize: 24,
+                    isExpanded: true,
+                    elevation: 16,
+                    style: const TextStyle(color: Colors.deepPurple),
+                    // underline: Container(
+                    //   height: 2,
+                    //   color: Colors.deepPurpleAccent,
+                    // ),
+                    onChanged: (String? newValue) {
+                      setState(() {
+                        profilePic = newValue!;
+                      });
+                    },
+                    items:
+                        imageList.map<DropdownMenuItem<String>>((String value) {
+                      return DropdownMenuItem<String>(
+                        value: value,
+                        child: Image.network(
+                          value,
+                          width: 250,
+                          height: 150,
+                        ),
+                      );
+                    }).toList(),
+                  ),
+                ),
                 SizedBox(height: 30),
                 Container(
                   width: double.infinity,
                   child: Text(
                     'Name',
                     textAlign: TextAlign.left,
-                    style: TextStyle(
-                        fontSize: 18
-                    ),
                   ),
                 ),
                 Row(
@@ -122,9 +157,6 @@ class _MakeAccountState extends State<MakeAccount> {
                   child: Text(
                     'BITS ID',
                     textAlign: TextAlign.left,
-                    style: TextStyle(
-                        fontSize: 18
-                    ),
                   ),
                 ),
                 TextFormField(
@@ -141,9 +173,6 @@ class _MakeAccountState extends State<MakeAccount> {
                   child: Text(
                     'Degree',
                     textAlign: TextAlign.left,
-                    style: TextStyle(
-                        fontSize: 18
-                    ),
                   ),
                 ),
                 Container(
@@ -154,7 +183,7 @@ class _MakeAccountState extends State<MakeAccount> {
                     iconSize: 24,
                     isExpanded: true,
                     elevation: 16,
-                    style: TextStyle(color: Theme.of(context).primaryColor, ),
+                    style: const TextStyle(color: Colors.deepPurple),
                     // underline: Container(
                     //   height: 2,
                     //   color: Colors.deepPurpleAccent,
@@ -165,8 +194,12 @@ class _MakeAccountState extends State<MakeAccount> {
                         //degreeIn = newValue;
                       });
                     },
-                    items: ['Type of Degree','First Degree', 'Higher Degree', 'PhD']
-                        .map<DropdownMenuItem<String>>((String value) {
+                    items: [
+                      'Type of Degree',
+                      'First Degree',
+                      'Higher Degree',
+                      'PhD'
+                    ].map<DropdownMenuItem<String>>((String value) {
                       return DropdownMenuItem<String>(
                         value: value,
                         child: Text(value),
@@ -180,9 +213,6 @@ class _MakeAccountState extends State<MakeAccount> {
                   child: Text(
                     'Gender',
                     textAlign: TextAlign.left,
-                    style: TextStyle(
-                        fontSize: 18
-                    ),
                   ),
                 ),
                 Container(
@@ -193,17 +223,17 @@ class _MakeAccountState extends State<MakeAccount> {
                     iconSize: 24,
                     isExpanded: true,
                     elevation: 16,
-                    style: TextStyle(color: Theme.of(context).primaryColor,),
+                    style: const TextStyle(color: Colors.deepPurple),
                     underline: Container(
                       height: 2,
-                      color: Theme.of(context).primaryColor,
+                      color: Colors.deepPurpleAccent,
                     ),
                     onChanged: (String? newValue) {
                       setState(() {
                         dropdowngenderValue = newValue!;
                       });
                     },
-                    items: ['Gender','Male', 'Female', 'Other']
+                    items: ['Gender', 'Male', 'Female', 'Other']
                         .map<DropdownMenuItem<String>>((String value) {
                       return DropdownMenuItem<String>(
                         value: value,
@@ -218,22 +248,17 @@ class _MakeAccountState extends State<MakeAccount> {
                   child: Text(
                     'Branch',
                     textAlign: TextAlign.left,
-                    style: TextStyle(
-                        fontSize: 18
-                    ),
                   ),
                 ),
                 Container(
-                  
                   width: double.infinity,
                   child: DropdownButtonFormField(
-                    
                     value: dropdownbranchValue,
                     icon: const Icon(Icons.arrow_downward),
                     iconSize: 24,
                     isExpanded: true,
                     elevation: 16,
-                    style: TextStyle(color: Theme.of(context).primaryColor,),
+                    style: const TextStyle(color: Colors.deepPurple),
                     // underline: Container(
                     //   height: 2,
                     //   color: Colors.deepPurpleAccent,
@@ -244,8 +269,15 @@ class _MakeAccountState extends State<MakeAccount> {
                         degreeIn = newValue;
                       });
                     },
-                    items: ['Branch','CSE', 'EEE', 'ME', 'Chem.', 'Civil', 'B.Pharm']
-                        .map<DropdownMenuItem<String>>((String value) {
+                    items: [
+                      'Branch',
+                      'CSE',
+                      'EEE',
+                      'ME',
+                      'Chem.',
+                      'Civil',
+                      'B.Pharm'
+                    ].map<DropdownMenuItem<String>>((String value) {
                       return DropdownMenuItem<String>(
                         value: value,
                         child: Text(value),
@@ -259,9 +291,6 @@ class _MakeAccountState extends State<MakeAccount> {
                   child: Text(
                     'Contact Number',
                     textAlign: TextAlign.left,
-                    style: TextStyle(
-                        fontSize: 18
-                    ),
                   ),
                 ),
                 TextFormField(
@@ -277,9 +306,6 @@ class _MakeAccountState extends State<MakeAccount> {
                   child: Text(
                     'Email',
                     textAlign: TextAlign.left,
-                    style: TextStyle(
-                        fontSize: 18
-                    ),
                   ),
                 ),
                 TextFormField(
@@ -294,9 +320,6 @@ class _MakeAccountState extends State<MakeAccount> {
                   child: Text(
                     'About Me',
                     textAlign: TextAlign.left,
-                    style: TextStyle(
-                        fontSize: 18
-                    ),
                   ),
                 ),
                 TextFormField(
@@ -313,9 +336,6 @@ class _MakeAccountState extends State<MakeAccount> {
                   child: Text(
                     'Graduation Year',
                     textAlign: TextAlign.left,
-                    style: TextStyle(
-                        fontSize: 18
-                    ),
                   ),
                 ),
                 // Container(
@@ -356,29 +376,32 @@ class _MakeAccountState extends State<MakeAccount> {
                 Row(
                   children: [
                     ElevatedButton(
-                      onPressed: () {
-                        null;
-                      },
-                      child: Text('Cancel')),
-                    Flexible(child: SizedBox(),
-                    fit: FlexFit.tight,),
+                        onPressed: () async {
+                          await alertDialog(context);
+                        },
+                        child: Text('Cancel')),
+                    Flexible(
+                      child: SizedBox(),
+                      fit: FlexFit.tight,
+                    ),
                     ElevatedButton(
                         onPressed: () async {
                           if (_formKey.currentState!.validate()) {
-                            await DatabaseService(uid: user!.uid).updateUserProfile(
-                                firstname: firstname,
-                                secondname: secondname,
-                                instagramId: instagramId,
-                                aboutMe: aboutMe,
-                                degreeIn: degreeIn,
-                                BitsId: BitsId,
-                                graduationYear: graduationYear,
-                                hostelName: hostelName,
-                                whatsappNumber: whatsappNumber,
-                                profilePic: profilePic,
-                                firstLogin: false,
-                                emailId: emailId,
-                                numberOfPosts: 0);
+                            await DatabaseService(uid: user!.uid)
+                                .updateUserProfile(
+                                    firstname: firstname,
+                                    secondname: secondname,
+                                    instagramId: instagramId,
+                                    aboutMe: aboutMe,
+                                    degreeIn: degreeIn,
+                                    BitsId: BitsId,
+                                    graduationYear: graduationYear,
+                                    hostelName: hostelName,
+                                    whatsappNumber: whatsappNumber,
+                                    profilePic: profilePic,
+                                    firstLogin: false,
+                                    emailId: emailId,
+                                    numberOfPosts: 0);
                           }
                         },
                         child: Text('Make Account')),
@@ -390,5 +413,34 @@ class _MakeAccountState extends State<MakeAccount> {
         ),
       ),
     );
+  }
+
+  alertDialog(BuildContext context) {
+    showDialog(
+        context: context,
+        builder: (BuildContext context) {
+          return AlertDialog(
+              title: Text('Confirm'),
+              content: Text(
+                  'The account will be deleted along with all the changes made'),
+              actions: [
+                ElevatedButton(
+                    onPressed: () {
+                      Navigator.pop(context, 'Cancel');
+                    },
+                    child: Text('Cancel')),
+                ElevatedButton(
+                  onPressed: () async {
+                    try {
+                      await FirebaseAuth.instance.currentUser!.delete();
+                    } catch (e) {
+                      FirebaseAuth.instance.signOut();
+                    }
+                    Navigator.pop(context, 'Confirm');
+                  },
+                  child: Text('Confirm'),
+                )
+              ]);
+        });
   }
 }
