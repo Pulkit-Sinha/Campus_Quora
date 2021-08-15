@@ -20,7 +20,12 @@ class MyApp extends StatelessWidget {
       value: AuthService().user,
       initialData: null,
       child: MaterialApp(
-        theme: ThemeData(fontFamily: 'GoogleSans'),
+        theme: ThemeData(
+          fontFamily: 'GoogleSans',
+          brightness: Brightness.dark,
+          primaryColor: Colors.purple,
+          primarySwatch: Colors.purple,
+        ),
         onGenerateRoute: RouteGenerator.generateRoute,
         debugShowCheckedModeBanner: false,
         home: Wrapper(),

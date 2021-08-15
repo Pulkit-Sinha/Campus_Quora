@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:log_in/main.dart';
 
 const textInputDecoration = InputDecoration(
   fillColor: Colors.white,
@@ -16,3 +17,4 @@ const textInputDecoration = InputDecoration(
     ),
   ),
 );
+
