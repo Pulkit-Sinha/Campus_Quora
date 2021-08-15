@@ -25,7 +25,6 @@ class _HomePageState extends State<HomePage> {
             Navigator.of(context).pop();
           },
           child: Text('No'),
-
         ),
         ElevatedButton(
             onPressed: () async {
@@ -41,6 +40,8 @@ class _HomePageState extends State<HomePage> {
           return alertDialog;
         });
   }
+
+  String filterChosen = '';
 
   AuthService _auth = AuthService();
   @override
@@ -92,6 +93,29 @@ class _HomePageState extends State<HomePage> {
                 ),
               ],
             ),
+          ),
+          DropdownButton(
+            // iconSize: 24,
+            // isExpanded: true,
+            // elevation: 16,
+            style: const TextStyle(color: Colors.deepPurple),
+            underline: Container(
+              color: Colors.deepPurpleAccent,
+            ),
+            onChanged: (String? newValue) {
+              setState(() {
+                filterChosen = newValue!;
+              });
+            },
+            items: ['Food', 'Admission', 'Culture', 'General', 'Academics']
+                .map<DropdownMenuItem<String>>((String value) {
+              return DropdownMenuItem<String>(
+                value: value,
+                child: Text(value),
+              );
+            }).toList(),
+
+            icon: Icon(Icons.filter_alt),
           ),
         ]),
         //body will contain the list of questions ..on tapping each question user can see the option to answer the question and see the previous replies.
