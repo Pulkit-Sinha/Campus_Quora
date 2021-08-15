@@ -42,7 +42,7 @@ class QuestionTile extends StatelessWidget {
                       ),
                       onPressed: () {
                         Navigator.of(context).pushNamed('/answerPage',
-                            arguments: question.question);
+                            arguments: question);
                       },
                       label: Text(
                         'Answer',
@@ -61,7 +61,7 @@ class QuestionTile extends StatelessWidget {
                       ),
                       onPressed: () {
                         Navigator.of(context).pushNamed('/answerList',
-                            arguments: question.question);
+                            arguments: question);
                       },
                       label: FittedBox(
                         fit: BoxFit.contain,

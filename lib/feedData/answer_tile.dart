@@ -4,12 +4,13 @@ import 'package:flutter/material.dart';
 import 'package:log_in/Pranav/data/profile.dart';
 import 'package:log_in/Services/database.dart';
 import 'package:log_in/feedData/answers.dart';
+import 'package:log_in/feedData/question.dart';
 import 'package:log_in/shared/loading.dart';
 import 'package:provider/provider.dart';
 
 class AnswerTile extends StatefulWidget {
   final Answer answer;
-  String question;
+  Question question;
 
   AnswerTile({required this.answer, required this.question});
 
@@ -44,7 +45,7 @@ class _AnswerTileState extends State<AnswerTile> {
                     answername = await answername.replaceAll("/", "_");
                     await FirebaseFirestore.instance
                         .collection('questions')
-                        .doc(widget.question)
+                        .doc(widget.question.question)
                         .collection('answers')
                         .doc(answername)
                         .delete();
@@ -94,7 +95,7 @@ class _AnswerTileState extends State<AnswerTile> {
                       ListTile(
                         leading: ClipOval(
                           child: Image.network(
-                            'https://qph.fs.quoracdn.net/main-qimg-ab378d740f68914e92f551ecfa3d9457.webp',
+                            widget.answer.image,
                             height: 100,
                             width: 100,
                             fit: BoxFit.fitHeight,

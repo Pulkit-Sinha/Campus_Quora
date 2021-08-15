@@ -36,11 +36,13 @@ class _UserProfilePageState extends State<UserProfilePage> {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Center(
-                      child: CircleAvatar(
-                        backgroundImage: NetworkImage(user.profilePic),
-
-                        radius: heightOfScreen /
-                            15, // now remaining height is height - 100
+                      child: ClipOval(
+                        child: Image.network(
+                          user.profilePic,
+                          height: 110,
+                          width: 110,
+                          fit: BoxFit.fitHeight,
+                        ),
                       ),
                     ),
                     SizedBox(
@@ -54,7 +56,10 @@ class _UserProfilePageState extends State<UserProfilePage> {
                             child: ElevatedButton(
                                 style: ElevatedButton.styleFrom(
                                     primary: Colors.grey[800]),
-                                onPressed: () {},
+                                onPressed: () {
+                                  Navigator.pushNamed(
+                                      context, '/userAnswerList',arguments: userr.uid);
+                                },
                                 child: Text(
                                   'Posts: ${user.numberOfPosts}',
                                   style: TextStyle(
