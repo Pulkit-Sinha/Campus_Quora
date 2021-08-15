@@ -49,7 +49,14 @@ class _AnswerTileState extends State<AnswerTile> {
                         .collection('answers')
                         .doc(answername)
                         .delete();
-
+                    print(user.uid);
+                    print(answername);
+                    await FirebaseFirestore.instance
+                        .collection('userData')
+                        .doc(user.uid)
+                        .collection('userAnswers')
+                        .doc(answername)
+                        .delete();
                     await DatabaseService(uid: user.uid).updateUserProfile(
                         firstname: currentUser.firstname,
                         secondname: currentUser.secondname,
@@ -95,7 +102,8 @@ class _AnswerTileState extends State<AnswerTile> {
                       ListTile(
                         leading: GestureDetector(
                           onTap: () {
-                            Navigator.pushNamed(context, '/userProfilePage',arguments: widget.answer.uid);
+                            Navigator.pushNamed(context, '/userProfilePage',
+                                arguments: widget.answer.uid);
                           },
                           child: ClipOval(
                             child: Image.network(
