@@ -1,28 +1,37 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:log_in/Services/database.dart';
 import 'package:provider/provider.dart';
 import 'data/profile.dart';
 
 class UserProfilePage extends StatefulWidget {
+  String useruid;
+  UserProfilePage({required this.useruid});
   @override
   _UserProfilePageState createState() => _UserProfilePageState();
 }
 
 class _UserProfilePageState extends State<UserProfilePage> {
+  editInformation(String nameOfFieldtoBeChanged, String newValue) {
+    FirebaseFirestore.instance
+        .collection('userData')
+        .doc(FirebaseAuth.instance.currentUser!.uid)
+        .update({nameOfFieldtoBeChanged: newValue});
+  }
+
   @override
   Widget build(BuildContext context) {
-    final userr = Provider.of<Profile?>(context);
-
     double heightOfScreen = MediaQuery.of(context).size.height;
 
     return StreamBuilder<UserProfile>(
-        stream: DatabaseService(uid: userr!.uid).userProfile,
+        stream: DatabaseService(uid: widget.useruid).userProfile,
         builder: (context, snapshot) {
           if (!snapshot.hasData) {
             return Text('Error');
           }
-          UserProfile user = snapshot.data!;
+          UserProfile currentUser = snapshot.data!;
           return Scaffold(
               backgroundColor: Colors.grey[900],
               appBar: AppBar(
@@ -38,7 +47,7 @@ class _UserProfilePageState extends State<UserProfilePage> {
                     Center(
                       child: ClipOval(
                         child: Image.network(
-                          user.profilePic,
+                          currentUser.profilePic,
                           height: 110,
                           width: 110,
                           fit: BoxFit.fitHeight,
@@ -58,10 +67,11 @@ class _UserProfilePageState extends State<UserProfilePage> {
                                     primary: Colors.grey[800]),
                                 onPressed: () {
                                   Navigator.pushNamed(
-                                      context, '/userAnswerList',arguments: userr.uid);
+                                      context, '/userAnswerList',
+                                      arguments: widget.useruid);
                                 },
                                 child: Text(
-                                  'Posts: ${user.numberOfPosts}',
+                                  'Posts: ${currentUser.numberOfPosts}',
                                   style: TextStyle(
                                       color: Colors.amberAccent, fontSize: 18),
                                 )),
@@ -86,7 +96,7 @@ class _UserProfilePageState extends State<UserProfilePage> {
                                     height: heightOfScreen / 50,
                                   ),
                                   Text(
-                                    ('${user.firstname} ${user.secondname}'),
+                                    ('${currentUser.firstname} ${currentUser.secondname}'),
                                     style: TextStyle(
                                       color: Colors.amberAccent,
                                       letterSpacing: 2.0,
@@ -103,7 +113,7 @@ class _UserProfilePageState extends State<UserProfilePage> {
                                     height: heightOfScreen / 50,
                                   ),
                                   Text(
-                                    '${user.graduationYear}',
+                                    '${currentUser.graduationYear}',
                                     style: TextStyle(
                                       color: Colors.amberAccent,
                                       letterSpacing: 2.0,
@@ -122,7 +132,7 @@ class _UserProfilePageState extends State<UserProfilePage> {
                                     height: heightOfScreen / 50,
                                   ),
                                   Text(
-                                    '${user.degreeIn}',
+                                    '${currentUser.degreeIn}',
                                     style: TextStyle(
                                       color: Colors.amberAccent,
                                       letterSpacing: 2.0,
@@ -141,7 +151,7 @@ class _UserProfilePageState extends State<UserProfilePage> {
                                     height: heightOfScreen / 50,
                                   ),
                                   Text(
-                                    '${user.hostelName}',
+                                    '${currentUser.hostelName}',
                                     style: TextStyle(
                                       color: Colors.amberAccent,
                                       letterSpacing: 2.0,
@@ -160,7 +170,7 @@ class _UserProfilePageState extends State<UserProfilePage> {
                                     height: heightOfScreen / 50,
                                   ),
                                   Text(
-                                    '${user.aboutMe}',
+                                    '${currentUser.aboutMe}',
                                     style: TextStyle(
                                       color: Colors.amberAccent,
                                       letterSpacing: 2.0,
@@ -192,7 +202,7 @@ class _UserProfilePageState extends State<UserProfilePage> {
                                         width: heightOfScreen / 50,
                                       ),
                                       Text(
-                                        user.emailId,
+                                        currentUser.emailId,
                                         style: TextStyle(
                                           color: Colors.grey[500],
                                           fontSize: 18,
@@ -206,15 +216,15 @@ class _UserProfilePageState extends State<UserProfilePage> {
                                   ),
                                   Row(
                                     children: [
-                                      Icon(
-                                        Icons.phone,
+                                      FaIcon(
+                                        FontAwesomeIcons.whatsapp,
                                         color: Colors.grey,
                                       ),
                                       SizedBox(
                                         width: heightOfScreen / 50,
                                       ),
                                       Text(
-                                        user.whatsappNumber,
+                                        currentUser.whatsappNumber,
                                         style: TextStyle(
                                           color: Colors.grey[500],
                                           fontSize: 18,

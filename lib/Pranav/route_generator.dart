@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:log_in/Pranav/HomePage.dart';
+import 'package:log_in/Pranav/data/profile.dart';
 import 'package:log_in/Pranav/userAnswersScreen.dart';
 import 'package:log_in/Pranav/userprofileScreen.dart';
 import 'package:log_in/Vansh/navigationPage.dart';
@@ -15,7 +16,13 @@ class RouteGenerator {
       case '/makeAccount':
         return MaterialPageRoute(builder: (_) => MakeAccount());
       case '/userProfilePage':
-        return MaterialPageRoute(builder: (_) => UserProfilePage());
+        if (args is String) {
+          return MaterialPageRoute(
+              builder: (_) => UserProfilePage(
+                    useruid: args,
+                  ));
+        }
+        return MaterialPageRoute(builder: (_) => Text('Error occured'));
       case '/navigationPage':
         return MaterialPageRoute(builder: (_) => NavigationPage());
       case '/homePage':

@@ -93,12 +93,17 @@ class _AnswerTileState extends State<AnswerTile> {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       ListTile(
-                        leading: ClipOval(
-                          child: Image.network(
-                            widget.answer.image,
-                            height: 100,
-                            width: 100,
-                            fit: BoxFit.fitHeight,
+                        leading: GestureDetector(
+                          onTap: () {
+                            Navigator.pushNamed(context, '/userProfilePage',arguments: widget.answer.uid);
+                          },
+                          child: ClipOval(
+                            child: Image.network(
+                              widget.answer.image,
+                              height: 100,
+                              width: 100,
+                              fit: BoxFit.fitHeight,
+                            ),
                           ),
                         ),
                         trailing: currentUser.BitsId == widget.answer.BitsId
