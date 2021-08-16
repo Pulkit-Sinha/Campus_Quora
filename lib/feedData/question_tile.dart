@@ -12,8 +12,10 @@ class QuestionTile extends StatelessWidget {
   Widget build(BuildContext context) {
     if (filterChosen == '') {
       filteredQuestion = question;
-    } else if (filteredQuestion!.questionTag == filterChosen) {
+    } else if (question.questionTag == filterChosen) {
       filteredQuestion = question;
+    } else {
+      return Card();
     }
     return Column(
       crossAxisAlignment: CrossAxisAlignment.stretch,
