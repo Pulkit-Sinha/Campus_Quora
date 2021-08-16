@@ -4,10 +4,17 @@ import 'package:log_in/feedData/question.dart';
 
 class QuestionTile extends StatelessWidget {
   final Question question;
-  QuestionTile({required this.question});
+  final String filterChosen;
+  QuestionTile({required this.question, required this.filterChosen});
+  Question? filteredQuestion;
 
   @override
   Widget build(BuildContext context) {
+    if (filterChosen == '') {
+      filteredQuestion = question;
+    } else if (filteredQuestion!.questionTag == filterChosen) {
+      filteredQuestion = question;
+    }
     return Column(
       crossAxisAlignment: CrossAxisAlignment.stretch,
       children: [
@@ -21,7 +28,7 @@ class QuestionTile extends StatelessWidget {
                   margin: EdgeInsets.all(10),
                   child: Text(
                     //this will contain the question
-                    question.question,
+                    filteredQuestion!.question,
                     style: TextStyle(fontSize: 18),
                   ),
                 ),
@@ -29,8 +36,8 @@ class QuestionTile extends StatelessWidget {
                   margin: EdgeInsets.all(10),
                   child: Text(
                     //this will contain the question tag
-                    question.questionTag,
-                    style: TextStyle(fontSize: 10,color: Colors.purple),
+                    filteredQuestion!.questionTag,
+                    style: TextStyle(fontSize: 10, color: Colors.purple),
                   ),
                 ),
                 Row(
@@ -41,8 +48,8 @@ class QuestionTile extends StatelessWidget {
                         color: Colors.black,
                       ),
                       onPressed: () {
-                        Navigator.of(context).pushNamed('/answerPage',
-                            arguments: question);
+                        Navigator.of(context)
+                            .pushNamed('/answerPage', arguments: question);
                       },
                       label: Text(
                         'Answer',
@@ -60,8 +67,8 @@ class QuestionTile extends StatelessWidget {
                         color: Colors.black,
                       ),
                       onPressed: () {
-                        Navigator.of(context).pushNamed('/answerList',
-                            arguments: question);
+                        Navigator.of(context)
+                            .pushNamed('/answerList', arguments: question);
                       },
                       label: FittedBox(
                         fit: BoxFit.contain,

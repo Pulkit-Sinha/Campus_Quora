@@ -131,7 +131,7 @@ class _HomePageState extends State<HomePage> {
         ]),
         //body will contain the list of questions ..on tapping each question user can see the option to answer the question and see the previous replies.
 
-        body: filterChosen == '' ? QuestionList() : null,
+        body: QuestionList(filterChosen),
       ),
     );
   }
