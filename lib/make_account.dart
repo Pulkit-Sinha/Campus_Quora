@@ -70,7 +70,10 @@ class _MakeAccountState extends State<MakeAccount> {
                   ),
                 ),
                 SizedBox(height: 10),
-                Text('Add image'),
+                Text('Add image',
+                style: TextStyle(
+                  fontSize: 18
+                ),),
                 SizedBox(
                   height: 10,
                 ),
@@ -83,7 +86,7 @@ class _MakeAccountState extends State<MakeAccount> {
                     iconSize: 24,
                     isExpanded: true,
                     elevation: 16,
-                    style: const TextStyle(color: Colors.deepPurple),
+                    style: const TextStyle(color: Colors.purple),
                     // underline: Container(
                     //   height: 2,
                     //   color: Colors.deepPurpleAccent,
@@ -111,6 +114,9 @@ class _MakeAccountState extends State<MakeAccount> {
                   width: double.infinity,
                   child: Text(
                     'Name',
+                      style: TextStyle(
+                      fontSize: 18
+                  ),
                     textAlign: TextAlign.left,
                   ),
                 ),
@@ -156,6 +162,9 @@ class _MakeAccountState extends State<MakeAccount> {
                   width: double.infinity,
                   child: Text(
                     'BITS ID',
+                    style: TextStyle(
+                        fontSize: 18
+                    ),
                     textAlign: TextAlign.left,
                   ),
                 ),
@@ -172,6 +181,9 @@ class _MakeAccountState extends State<MakeAccount> {
                   width: double.infinity,
                   child: Text(
                     'Degree',
+                    style: TextStyle(
+                        fontSize: 18
+                    ),
                     textAlign: TextAlign.left,
                   ),
                 ),
@@ -183,7 +195,7 @@ class _MakeAccountState extends State<MakeAccount> {
                     iconSize: 24,
                     isExpanded: true,
                     elevation: 16,
-                    style: const TextStyle(color: Colors.deepPurple),
+                    style: const TextStyle(color: Colors.purple),
                     // underline: Container(
                     //   height: 2,
                     //   color: Colors.deepPurpleAccent,
@@ -212,6 +224,9 @@ class _MakeAccountState extends State<MakeAccount> {
                   width: double.infinity,
                   child: Text(
                     'Gender',
+                    style: TextStyle(
+                        fontSize: 18
+                    ),
                     textAlign: TextAlign.left,
                   ),
                 ),
@@ -223,11 +238,7 @@ class _MakeAccountState extends State<MakeAccount> {
                     iconSize: 24,
                     isExpanded: true,
                     elevation: 16,
-                    style: const TextStyle(color: Colors.deepPurple),
-                    underline: Container(
-                      height: 2,
-                      color: Colors.deepPurpleAccent,
-                    ),
+                    style: const TextStyle(color: Colors.purple),
                     onChanged: (String? newValue) {
                       setState(() {
                         dropdowngenderValue = newValue!;
@@ -247,6 +258,9 @@ class _MakeAccountState extends State<MakeAccount> {
                   width: double.infinity,
                   child: Text(
                     'Branch',
+                    style: TextStyle(
+                        fontSize: 18
+                    ),
                     textAlign: TextAlign.left,
                   ),
                 ),
@@ -258,7 +272,7 @@ class _MakeAccountState extends State<MakeAccount> {
                     iconSize: 24,
                     isExpanded: true,
                     elevation: 16,
-                    style: const TextStyle(color: Colors.deepPurple),
+                    style: const TextStyle(color: Colors.purple),
                     // underline: Container(
                     //   height: 2,
                     //   color: Colors.deepPurpleAccent,
@@ -290,6 +304,9 @@ class _MakeAccountState extends State<MakeAccount> {
                   width: double.infinity,
                   child: Text(
                     'Contact Number',
+                    style: TextStyle(
+                        fontSize: 18
+                    ),
                     textAlign: TextAlign.left,
                   ),
                 ),
@@ -305,6 +322,9 @@ class _MakeAccountState extends State<MakeAccount> {
                   width: double.infinity,
                   child: Text(
                     'Email',
+                    style: TextStyle(
+                        fontSize: 18
+                    ),
                     textAlign: TextAlign.left,
                   ),
                 ),
@@ -319,6 +339,9 @@ class _MakeAccountState extends State<MakeAccount> {
                   width: double.infinity,
                   child: Text(
                     'About Me',
+                    style: TextStyle(
+                        fontSize: 18
+                    ),
                     textAlign: TextAlign.left,
                   ),
                 ),
@@ -335,6 +358,9 @@ class _MakeAccountState extends State<MakeAccount> {
                   width: double.infinity,
                   child: Text(
                     'Graduation Year',
+                    style: TextStyle(
+                        fontSize: 18
+                    ),
                     textAlign: TextAlign.left,
                   ),
                 ),
