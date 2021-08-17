@@ -102,13 +102,24 @@ class _HomePageState extends State<HomePage> {
             underline: Container(
               color: Colors.deepPurpleAccent,
             ),
+            hint: Text("Filter"),
             onChanged: (String? newValue) {
               setState(() {
-                filterChosen = newValue!;
+                if (newValue != 'Remove Filter') {
+                  filterChosen = newValue!;
+                } else {
+                  filterChosen = '';
+                }
               });
             },
-            items: ['Food', 'Admission', 'Culture', 'General', 'Academics']
-                .map<DropdownMenuItem<String>>((String value) {
+            items: [
+              'Food',
+              'Admission',
+              'Culture',
+              'General',
+              'Academics',
+              'Remove Filter',
+            ].map<DropdownMenuItem<String>>((String value) {
               return DropdownMenuItem<String>(
                 value: value,
                 child: Text(value),
@@ -120,7 +131,7 @@ class _HomePageState extends State<HomePage> {
         ]),
         //body will contain the list of questions ..on tapping each question user can see the option to answer the question and see the previous replies.
 
-        body: QuestionList(),
+        body: QuestionList(filterChosen),
       ),
     );
   }
