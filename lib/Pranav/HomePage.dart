@@ -15,31 +15,31 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
-  alertdialog(BuildContext context, AuthService auth) {
-    var alertDialog = AlertDialog(
-      title: Text('Confirm'),
-      content: Text('Do you want to Log Out?'),
-      actions: [
-        ElevatedButton(
-          onPressed: () {
-            Navigator.of(context).pop();
-          },
-          child: Text('No'),
-        ),
-        ElevatedButton(
-            onPressed: () async {
-              await auth.signOut();
-              Navigator.of(context).pop();
-            },
-            child: Text('Yes'))
-      ],
-    );
-    showDialog(
-        context: context,
-        builder: (BuildContext context) {
-          return alertDialog;
-        });
-  }
+  // alertdialog(BuildContext context, AuthService auth) {
+  //   var alertDialog = AlertDialog(
+  //     title: Text('Confirm'),
+  //     content: Text('Do you want to Log Out?'),
+  //     actions: [
+  //       ElevatedButton(
+  //         onPressed: () {
+  //           Navigator.of(context).pop();
+  //         },
+  //         child: Text('No'),
+  //       ),
+  //       ElevatedButton(
+  //           onPressed: () async {
+  //             await auth.signOut();
+  //             Navigator.of(context).pop();
+  //           },
+  //           child: Text('Yes'))
+  //     ],
+  //   );
+  //   showDialog(
+  //       context: context,
+  //       builder: (BuildContext context) {
+  //         return alertDialog;
+  //       });
+  // }
 
   String filterChosen = '';
 

@@ -35,7 +35,8 @@ class _AskQuestionState extends State<AskQuestion> {
               keyboardType: TextInputType.multiline,
               maxLines: null,
               decoration: textInputDecoration.copyWith(
-                  hintText: 'Type Your Question here!'
+                  hintText: 'Type Your Question here!',
+                  
               ),
               validator: (val) =>
                   val!.isEmpty ? 'Please enter a question here' : null,

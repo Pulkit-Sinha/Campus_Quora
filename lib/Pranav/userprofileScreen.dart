@@ -2,11 +2,13 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:log_in/Services/auth.dart';
 import 'package:log_in/Services/database.dart';
 import 'package:provider/provider.dart';
 import 'data/profile.dart';
 
 class UserProfilePage extends StatefulWidget {
+  
   String useruid;
   UserProfilePage({required this.useruid});
   @override
@@ -19,6 +21,32 @@ class _UserProfilePageState extends State<UserProfilePage> {
         .collection('userData')
         .doc(FirebaseAuth.instance.currentUser!.uid)
         .update({nameOfFieldtoBeChanged: newValue});
+  }
+   AuthService _auth = AuthService();
+  alertdialog(BuildContext context, AuthService auth) {
+    var alertDialog = AlertDialog(
+      title: Text('Confirm'),
+      content: Text('Do you want to Log Out?'),
+      actions: [
+        ElevatedButton(
+          onPressed: () {
+            Navigator.of(context).pop();
+          },
+          child: Text('No'),
+        ),
+        ElevatedButton(
+            onPressed: () async {
+              await auth.signOut();
+              Navigator.of(context).pop();
+            },
+            child: Text('Yes'))
+      ],
+    );
+    showDialog(
+        context: context,
+        builder: (BuildContext context) {
+          return alertDialog;
+        });
   }
 
   @override
@@ -33,11 +61,33 @@ class _UserProfilePageState extends State<UserProfilePage> {
           }
           UserProfile currentUser = snapshot.data!;
           return Scaffold(
+            
               backgroundColor: Colors.grey[900],
               appBar: AppBar(
                 title: Text('User Profile'),
                 centerTitle: true,
                 backgroundColor: Colors.grey[850],
+                actions: [
+          TextButton(
+            onPressed: () {
+              alertdialog(context, _auth);
+            },
+            child: Row(
+              children: [
+                Icon(
+                  Icons.logout,
+                  //color: Colors.black,
+                ),
+                SizedBox(
+                  width: 4,
+                ),
+                Text(
+                  'Logout',
+                  //style: TextStyle(color: Colors.black),
+                ),
+              ],
+            ),
+          )]
               ),
               body: Padding(
                 padding: EdgeInsets.fromLTRB(20.0, 30, 20, 0),

@@ -29,16 +29,16 @@ class _NavigationPageState extends State<NavigationPage> {
     List<Widget> _screens = [
     HomePage(),
     UserProfilePage(useruid: user!.uid,),
-    Scaffold(
-      appBar: AppBar(
-        title: Text('Notifications'),
-      ),
-    ),
-    Scaffold(
-      appBar: AppBar(
-        title: Text('Following'),
-      ),
-    ),
+    // Scaffold(
+    //   appBar: AppBar(
+    //     title: Text('Notifications'),
+    //   ),
+    // ),
+    // Scaffold(
+    //   appBar: AppBar(
+    //     title: Text('Following'),
+    //   ),
+    // ),
   ];
     return Scaffold(
       // appBar: AppBar(
@@ -77,16 +77,16 @@ class _NavigationPageState extends State<NavigationPage> {
               icon: Icon(Icons.account_box),
               label: 'Profile',
               backgroundColor: Colors.blue),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.circle_notifications_rounded),
-            label: "Notifications",
-            backgroundColor: Colors.blue,
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.group),
-            label: "Following",
-            backgroundColor: Colors.blue,
-          ),
+          // BottomNavigationBarItem(
+          //   icon: Icon(Icons.circle_notifications_rounded),
+          //   label: "Notifications",
+          //   backgroundColor: Colors.blue,
+          // ),
+          // BottomNavigationBarItem(
+          //   icon: Icon(Icons.group),
+          //   label: "Following",
+          //   backgroundColor: Colors.blue,
+          // ),
         ],
 
         // backgroundColor: Colors.black,

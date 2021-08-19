@@ -10,6 +10,7 @@ const textInputDecoration = InputDecoration(
       width: 2,
     ),
   ),
+  hintStyle: TextStyle(color: Colors.grey),
   focusedBorder: OutlineInputBorder(
     borderSide: BorderSide(
       color: Colors.purple,
