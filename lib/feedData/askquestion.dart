@@ -29,10 +29,14 @@ class _AskQuestionState extends State<AskQuestion> {
               height: 20,
             ),
             TextFormField(
+              style: TextStyle(
+                color: Colors.black,
+              ),
               keyboardType: TextInputType.multiline,
               maxLines: null,
               decoration: textInputDecoration.copyWith(
-                  hintText: 'Type Your Question here!'),
+                  hintText: 'Type Your Question here!'
+              ),
               validator: (val) =>
                   val!.isEmpty ? 'Please enter a question here' : null,
               onChanged: (val) {
@@ -48,10 +52,10 @@ class _AskQuestionState extends State<AskQuestion> {
               iconSize: 24,
               isExpanded: true,
               elevation: 16,
-              style: const TextStyle(color: Colors.deepPurple),
+              style: const TextStyle(color: Colors.purple),
               validator: (val) =>
                   val == null ? "Please mention type of question" : null,
-              hint: Text("Type of Question"),
+              hint: Text("Category"),
               // underline: Container(
               //   height: 2,
               //   color: Colors.deepPurpleAccent,
@@ -81,7 +85,7 @@ class _AskQuestionState extends State<AskQuestion> {
                     Navigator.of(context).pop();
                   }
                 },
-                child: Text('Add Question'))
+                child: Text('Ask Question'))
           ],
         ),
       ),

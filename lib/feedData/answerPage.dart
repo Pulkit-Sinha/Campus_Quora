@@ -39,7 +39,7 @@ class _AnswerPageState extends State<AnswerPage> {
                 child: Column(
                   children: [
                     Text(
-                      'Question : ${widget.question.question}',
+                      '${widget.question.question}',
                       style: TextStyle(fontSize: 20),
                     ),
                     SizedBox(
@@ -50,6 +50,9 @@ class _AnswerPageState extends State<AnswerPage> {
                       child: Column(
                         children: [
                           TextFormField(
+                            style: TextStyle(
+                              color: Colors.black,
+                            ),
                             keyboardType: TextInputType.multiline,
                             maxLines: null,
                             decoration: textInputDecoration.copyWith(
@@ -107,7 +110,7 @@ class _AnswerPageState extends State<AnswerPage> {
                                   Navigator.of(context).pop();
                                 }
                               },
-                              child: Text('Post this answer'))
+                              child: Text('Post'))
                         ],
                       ),
                     )

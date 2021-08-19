@@ -28,7 +28,7 @@ class _AnswerTileState extends State<AnswerTile> {
         builder: (BuildContext context) {
           return AlertDialog(
             title: Text('Confirm Delete'),
-            content: Text('Do you want to delete this answer?'),
+            content: Text('Are you sure you want to delete your answer?'),
             actions: [
               ElevatedButton(
                   onPressed: () {

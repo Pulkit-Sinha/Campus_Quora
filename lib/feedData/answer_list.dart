@@ -29,30 +29,36 @@ class _AnswerListState extends State<AnswerList> {
             return answers!.length == 0
                 ? Scaffold(
                     appBar: AppBar(
-                      title: Text('View Answers'),
+                      title: Text('Answers',
+                      style: TextStyle(
+                        fontWeight: FontWeight.bold
+                      ),),
                     ),
                     body: Container(
                       height: height * 0.9,
                       child: Column(children: [
                         Padding(
-                          padding: const EdgeInsets.fromLTRB(0, 10, 0, 0),
+                          padding: const EdgeInsets.fromLTRB(15, 10, 15, 10),
                           child: Text(
                             widget.question.question,
                             style: TextStyle(fontSize: 20),
                           ),
                         ),
                         SizedBox(
-                          height: 20,
+                          height: 60,
                         ),
                         Center(
-                          child: Text('This question is not yet answered'),
+                          child: Text('This question has no answers yet.',
+                          style: TextStyle(
+                            fontSize: 16
+                          ),),
                         )
                       ]),
                     ),
                   )
                 : Scaffold(
                     appBar: AppBar(
-                      title: Text('View Answers'),
+                      title: Text('Answers'),
                     ),
                     body: SingleChildScrollView(
                       child: Container(
@@ -60,7 +66,7 @@ class _AnswerListState extends State<AnswerList> {
                         child: Column(
                           children: [
                             Padding(
-                              padding: const EdgeInsets.fromLTRB(0, 10, 0, 0),
+                              padding: const EdgeInsets.fromLTRB(15, 10, 15, 10),
                               child: Text(
                                 widget.question.question,                               
                                 style: TextStyle(fontSize: 20),
@@ -70,14 +76,16 @@ class _AnswerListState extends State<AnswerList> {
                             SizedBox(
                               height: 20,
                             ),
-                            Container(
-                              height: height * (0.7),
-                              child: ListView.builder(
-                                shrinkWrap: true,
-                                itemBuilder: (context, index) {
-                                  return AnswerTile(answer: answers[index],question: widget.question,);
-                                },
-                                itemCount: answers.length,
+                            SingleChildScrollView(
+                              child: Container(
+                                height: height * (0.7),
+                                child: ListView.builder(
+                                  shrinkWrap: true,
+                                  itemBuilder: (context, index) {
+                                    return AnswerTile(answer: answers[index],question: widget.question,);
+                                  },
+                                  itemCount: answers.length,
+                                ),
                               ),
                             ),
                           ],

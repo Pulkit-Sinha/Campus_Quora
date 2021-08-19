@@ -53,6 +53,7 @@ class _HomePageState extends State<HomePage> {
       initialData: null,
       child: Scaffold(
         floatingActionButton: FloatingActionButton(
+          backgroundColor: Colors.purple,
           onPressed: () {
             showModalBottomSheet(
                 context: context,
@@ -67,14 +68,25 @@ class _HomePageState extends State<HomePage> {
             fit: BoxFit.cover,
             child: Row(
               children: [
-                // Icon(Icons.add,),
-                Text('Add Ques')
+                Icon(Icons.add,
+                size: 40,
+                color: Colors.white,),
+                /*Text('Add Ques')*/
               ],
             ),
           ),
         ),
         floatingActionButtonLocation: FloatingActionButtonLocation.endFloat,
-        appBar: AppBar(title: Text('Home'), actions: [
+        appBar: AppBar(title: Container(
+          width: 190,
+            child: Text('Home',
+            style: TextStyle(
+              fontWeight: FontWeight.bold,
+              fontSize: 22,
+            ),
+            textAlign: TextAlign.end,),
+        ),
+            actions: [
           /*TextButton(
             onPressed: () {
               alertdialog(context, _auth);

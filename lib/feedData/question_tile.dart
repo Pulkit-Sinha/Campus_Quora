@@ -39,7 +39,7 @@ class QuestionTile extends StatelessWidget {
                   child: Text(
                     //this will contain the question tag
                     filteredQuestion!.questionTag,
-                    style: TextStyle(fontSize: 10, color: Colors.purple),
+                    style: TextStyle(fontSize: 16, color: Colors.purple),
                   ),
                 ),
                 Row(
@@ -47,7 +47,7 @@ class QuestionTile extends StatelessWidget {
                     ElevatedButton.icon(
                       icon: FaIcon(
                         FontAwesomeIcons.pencilAlt,
-                        color: Colors.black,
+                        color: Colors.white,
                       ),
                       onPressed: () {
                         Navigator.of(context)
@@ -55,10 +55,10 @@ class QuestionTile extends StatelessWidget {
                       },
                       label: Text(
                         'Answer',
-                        style: TextStyle(color: Colors.black),
+                        style: TextStyle(color: Colors.white),
                       ),
                       style: ElevatedButton.styleFrom(
-                          primary: Colors.white, elevation: 0),
+                          primary: Colors.purple, elevation: 0),
                     ),
                     SizedBox(
                       width: 20,
@@ -66,7 +66,7 @@ class QuestionTile extends StatelessWidget {
                     ElevatedButton.icon(
                       icon: FaIcon(
                         FontAwesomeIcons.list,
-                        color: Colors.black,
+                        color: Colors.white,
                       ),
                       onPressed: () {
                         Navigator.of(context)
@@ -76,11 +76,11 @@ class QuestionTile extends StatelessWidget {
                         fit: BoxFit.contain,
                         child: Text(
                           'View Previous Answers',
-                          style: TextStyle(color: Colors.black, fontSize: 14),
+                          style: TextStyle(color: Colors.white, fontSize: 14),
                         ),
                       ),
                       style: ElevatedButton.styleFrom(
-                          primary: Colors.white, elevation: 0),
+                          primary: Colors.purple, elevation: 0),
                     ),
                   ],
                 ),
