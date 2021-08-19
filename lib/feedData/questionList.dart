@@ -16,6 +16,7 @@ class _QuestionListState extends State<QuestionList> {
     final questions = Provider.of<List<Question>?>(context) ?? [];
 
     return ListView.builder(
+      physics: const AlwaysScrollableScrollPhysics(),
       itemBuilder: (context, index) {
         return QuestionTile(
           question: questions[index],
