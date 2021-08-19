@@ -39,7 +39,7 @@ class QuestionTile extends StatelessWidget {
                   child: Text(
                     //this will contain the question tag
                     filteredQuestion!.questionTag,
-                    style: TextStyle(fontSize: 16, color: Colors.purple),
+                    style: TextStyle(fontSize: 16, color: Colors.yellow),
                   ),
                 ),
                 Row(
