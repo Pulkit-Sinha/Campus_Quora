@@ -15,7 +15,9 @@ class QuestionTile extends StatelessWidget {
     } else if (question.questionTag == filterChosen) {
       filteredQuestion = question;
     } else {
-      return Card();
+      return Container(
+        height: 0,
+      );
     }
     return Column(
       crossAxisAlignment: CrossAxisAlignment.stretch,
