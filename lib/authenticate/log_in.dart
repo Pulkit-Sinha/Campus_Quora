@@ -34,7 +34,7 @@ class _LogInPageState extends State<LogInPage> {
     return loading == true
         ? Loading()
         : Scaffold(
-          backgroundColor: Colors.black12,
+            backgroundColor: Colors.black12,
             body: SingleChildScrollView(
               child: Container(
                 child: Column(
@@ -46,13 +46,19 @@ class _LogInPageState extends State<LogInPage> {
                         child: Column(
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [
-                            Text('Log In',style: TextStyle(color: Colors.white),),
+                            Text(
+                              'Log In',
+                              style: TextStyle(color: Colors.white),
+                            ),
                             TextFormField(
+                              style: TextStyle(
+                                color: Colors.black,
+                              ),
                               onChanged: (enteredEmail) {
                                 email = enteredEmail;
                               },
-                              decoration:
-                                  textInputDecoration.copyWith(hintText: 'Email'),
+                              decoration: textInputDecoration.copyWith(
+                                  hintText: 'Email'),
                               validator: (val) =>
                                   val!.isEmpty ? 'Enter an email' : null,
                             ),
@@ -60,6 +66,9 @@ class _LogInPageState extends State<LogInPage> {
                               height: 20,
                             ),
                             TextFormField(
+                              style: TextStyle(
+                                color: Colors.black,
+                              ),
                               decoration: textInputDecoration.copyWith(
                                 hintText: 'Password',
                                 suffixIcon: IconButton(
@@ -87,12 +96,14 @@ class _LogInPageState extends State<LogInPage> {
                                     setState(() {
                                       loading = true;
                                     });
-                                    dynamic result = await _auth
-                                        .signInWithEmailAndPassword(email, password);
+                                    dynamic result =
+                                        await _auth.signInWithEmailAndPassword(
+                                            email, password);
                                     if (result == null) {
                                       setState(() {
                                         loading = false;
-                                        error = 'Could not sign with those credentials';
+                                        error =
+                                            'Could not sign with those credentials';
                                       });
                                     }
 
@@ -105,7 +116,8 @@ class _LogInPageState extends State<LogInPage> {
                             ),
                             Text(
                               error,
-                              style: TextStyle(color: Colors.red, fontSize: 14.0),
+                              style:
+                                  TextStyle(color: Colors.red, fontSize: 14.0),
                             ),
                             SizedBox(
                               height: 50,
@@ -116,19 +128,24 @@ class _LogInPageState extends State<LogInPage> {
                                 onPrimary: Colors.black,
                                 minimumSize: Size(double.infinity, 50),
                               ),
-                              onPressed: ()async {
+                              onPressed: () async {
                                 setState(() {
-                                      loading = true;
-                                    });
-                                    dynamic result = await _auth.googleLogin();
+                                  loading = true;
+                                });
+                                dynamic result = await _auth.googleLogin();
 
-                                    if (result == null) {
-                                      setState(() {
-                                        loading = false;
-                                        error = 'Could not sign with those credentials';
-                                      });
-                              }},
-                              icon: FaIcon(FontAwesomeIcons.google,color: Colors.red,),
+                                if (result == null) {
+                                  setState(() {
+                                    loading = false;
+                                    error =
+                                        'Could not sign with those credentials';
+                                  });
+                                }
+                              },
+                              icon: FaIcon(
+                                FontAwesomeIcons.google,
+                                color: Colors.red,
+                              ),
                               label: Text('Sign Up With Google'),
                             ),
                             ElevatedButton(

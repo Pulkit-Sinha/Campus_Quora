@@ -49,16 +49,22 @@ class DatabaseService {
     });
   }
 
-  Future updateQuestion(String question, String questionTag) async {
+  Future updateQuestion(
+      String question, String questionTag, String uid) async {
     return await questionCollection.doc(question).set({
       'question': question,
       'questionTag': questionTag,
+      'uid': uid,
     });
   }
 
   Future updateUserAnswers(String question, String answer, String answername,
       String questionTag) async {
-    return await userDataCollection.doc(uid).collection('userAnswers').doc(answername).set({
+    return await userDataCollection
+        .doc(uid)
+        .collection('userAnswers')
+        .doc(answername)
+        .set({
       'question': question,
       'questionTag': questionTag,
       'answer': answer,
@@ -105,7 +111,8 @@ class DatabaseService {
     return snapshot.docs.map((e) {
       return Question(
           question: e.get('question') ?? "",
-          questionTag: e.get('questionTag') ?? "");
+          questionTag: e.get('questionTag') ?? "",
+          uid: e.get('uid') ?? "");
     }).toList();
   }
 
@@ -142,7 +149,7 @@ class DatabaseService {
     }).toList();
   }
 
-  Stream<List<UserAnswers>> get userAnswersList  {
+  Stream<List<UserAnswers>> get userAnswersList {
     return userDataCollection
         .doc(uid)
         .collection('userAnswers')

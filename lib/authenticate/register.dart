@@ -54,7 +54,8 @@ class _RegisterState extends State<Register> {
               child: Column(
                 children: [
                   Container(
-                      padding: EdgeInsets.symmetric(vertical: 20, horizontal: 50),
+                      padding:
+                          EdgeInsets.symmetric(vertical: 20, horizontal: 50),
                       child: Form(
                           key: _formKey,
                           child: Column(
@@ -63,10 +64,13 @@ class _RegisterState extends State<Register> {
                                 height: 20,
                               ),
                               TextFormField(
+                                style: TextStyle(
+                                  color: Colors.black,
+                                ),
                                 validator: (val) =>
                                     val!.isEmpty ? 'Enter an email' : null,
-                                decoration:
-                                    textInputDecoration.copyWith(hintText: 'Email'),
+                                decoration: textInputDecoration.copyWith(
+                                    hintText: 'Email'),
                                 onChanged: (val) {
                                   setState(() {
                                     email = val;
@@ -77,6 +81,9 @@ class _RegisterState extends State<Register> {
                                 height: 20,
                               ),
                               TextFormField(
+                                style: TextStyle(
+                                  color: Colors.black,
+                                ),
                                 validator: (val) => val!.length < 6
                                     ? 'Password must have atleast 6 characters'
                                     : null,
@@ -107,8 +114,8 @@ class _RegisterState extends State<Register> {
                                     setState(() {
                                       loading = true;
                                     });
-                                    dynamic result =
-                                        await _auth.registerWithEmailAndPassword(
+                                    dynamic result = await _auth
+                                        .registerWithEmailAndPassword(
                                             email, password);
                                     if (result == null) {
                                       setState(() {
@@ -131,7 +138,8 @@ class _RegisterState extends State<Register> {
                               ),
                               Text(
                                 error,
-                                style: TextStyle(color: Colors.red, fontSize: 14.0),
+                                style: TextStyle(
+                                    color: Colors.red, fontSize: 14.0),
                               )
                             ],
                           ))),

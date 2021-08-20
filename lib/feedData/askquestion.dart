@@ -1,3 +1,4 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:log_in/Pranav/data/profile.dart';
 import 'package:log_in/Services/database.dart';
@@ -82,7 +83,7 @@ class _AskQuestionState extends State<AskQuestion> {
                 onPressed: () async {
                   if (_formKey.currentState!.validate()) {
                     DatabaseService(uid: user!.uid)
-                        .updateQuestion(question, questionTag);
+                        .updateQuestion(question, questionTag,user.uid);
                     Navigator.of(context).pop();
                   }
                 },

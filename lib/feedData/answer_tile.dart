@@ -19,7 +19,6 @@ class AnswerTile extends StatefulWidget {
 }
 
 class _AnswerTileState extends State<AnswerTile> {
-  bool deleteAnswer = false;
 
   alertDialogResult(BuildContext Alertcontext, String answername,
       UserProfile currentUser, Profile user) {
