@@ -151,9 +151,18 @@ class _LogInPageState extends State<LogInPage> {
                                 onPressed: () {
                                   widget.toggleView();
                                 },
-                                child: Text(
-                                  'Don\'t have an account? Sign up here',
-                                  
+                                child: Column(
+                                  children: [
+                                    Text(
+                                      'Don\'t have an account?',
+                                      textAlign: TextAlign.center,
+                                    ),
+                                    Text(
+                                      'Sign Up here',
+                                      textAlign: TextAlign.center,
+                                      style: TextStyle(color: Colors.amber),
+                                    ),
+                                  ],
                                 ))
                           ],
                         ),

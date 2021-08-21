@@ -150,8 +150,19 @@ class _RegisterState extends State<Register> {
                                   onPressed: () {
                                     widget.toggleView();
                                   },
-                                  child: Text(
-                                    'Already have an account? Sign in here',
+                                  child: Column(
+                                    children: [
+                                      Text(
+                                        'Already have an account?',
+                                        style: TextStyle(),
+                                        textAlign: TextAlign.center,
+                                      ),
+                                       Text(
+                                        'Sign In here',
+                                        style: TextStyle(color: Colors.amber),
+                                        textAlign: TextAlign.center,
+                                      ),
+                                    ],
                                   ))
                             ],
                           ))),
