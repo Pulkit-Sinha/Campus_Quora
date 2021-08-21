@@ -34,22 +34,20 @@ class _LogInPageState extends State<LogInPage> {
     return loading == true
         ? Loading()
         : Scaffold(
-            backgroundColor: Colors.black12,
+          appBar: AppBar(title: Text('Log In'),centerTitle: true,),
+            backgroundColor: Colors.grey[850],
             body: SingleChildScrollView(
               child: Container(
                 child: Column(
                   children: [
                     Container(
-                      padding: const EdgeInsets.all(12.0),
+                      padding: EdgeInsets.symmetric(vertical: 20, horizontal: 50),
                       child: Form(
                         key: _formKey,
                         child: Column(
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [
-                            Text(
-                              'Log In',
-                              style: TextStyle(color: Colors.white),
-                            ),
+                            
                             TextFormField(
                               style: TextStyle(
                                 color: Colors.black,
@@ -148,12 +146,14 @@ class _LogInPageState extends State<LogInPage> {
                               ),
                               label: Text('Sign Up With Google'),
                             ),
+                            SizedBox(height: 10,),
                             ElevatedButton(
                                 onPressed: () {
                                   widget.toggleView();
                                 },
                                 child: Text(
-                                  'Don\'t have an account? Sign up here.',
+                                  'Don\'t have an account? Sign up here',
+                                  
                                 ))
                           ],
                         ),

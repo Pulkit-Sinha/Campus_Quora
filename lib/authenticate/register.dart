@@ -26,30 +26,32 @@ class _RegisterState extends State<Register> {
         ? Loading()
         : Scaffold(
             appBar: AppBar(
-                elevation: 0,
-                title: Text('Sign up to Campus Quora'),
-                actions: [
-                  TextButton(
-                    onPressed: () {
-                      widget.toggleView();
-                    },
-                    child: Row(
-                      children: [
-                        Icon(
-                          Icons.person,
-                          color: Colors.black,
-                        ),
-                        SizedBox(
-                          width: 4,
-                        ),
-                        Text(
-                          'Sign In',
-                          style: TextStyle(color: Colors.black),
-                        ),
-                      ],
-                    ),
-                  )
-                ]),
+              elevation: 0,
+              centerTitle: true,
+              title: Text('Sign up'),
+              // actions: [
+              //   TextButton(
+              //     onPressed: () {
+              //       widget.toggleView();
+              //     },
+              //     child: Row(
+              //       children: [
+              //         Icon(
+              //           Icons.person,
+              //           color: Colors.black,
+              //         ),
+              //         SizedBox(
+              //           width: 4,
+              //         ),
+              //         Text(
+              //           'Sign In',
+              //           style: TextStyle(color: Colors.black),
+              //         ),
+              //       ],
+              //     ),
+              //   )
+              // ]
+            ),
             body: SingleChildScrollView(
               child: Column(
                 children: [
@@ -140,7 +142,17 @@ class _RegisterState extends State<Register> {
                                 error,
                                 style: TextStyle(
                                     color: Colors.red, fontSize: 14.0),
-                              )
+                              ),
+                              SizedBox(
+                                height: 50,
+                              ),
+                              ElevatedButton(
+                                  onPressed: () {
+                                    widget.toggleView();
+                                  },
+                                  child: Text(
+                                    'Already have an account? Sign in here',
+                                  ))
                             ],
                           ))),
                 ],
