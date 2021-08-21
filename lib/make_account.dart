@@ -52,7 +52,6 @@ class _MakeAccountState extends State<MakeAccount> {
     'https://www.cnet.com/a/img/liJ9UZA87zs1viJiuEfVnL7YYfw=/940x0/2020/05/18/5bac8cc1-4bd5-4496-a8c3-66a6cd12d0cb/fb-avatar-2.jpg',
     'https://i.pinimg.com/originals/6e/aa/af/6eaaaf349ca9a412253ff3af1eda27c5.jpg',
     'https://icon-library.com/images/anonymous-avatar-icon/anonymous-avatar-icon-9.jpg',
-    'https://cdn5.vectorstock.com/i/1000x1000/73/04/female-avatar-profile-icon-round-woman-face-vector-18307304.jpg',
     'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS5c5K60TwIXp0ApigfdU98E3IexnnDT75bbQ&usqp=CAU',
     'https://cdn.statically.io/img/avatarfiles.alphacoders.com/166/166996.jpg',
     'https://cutewallpaper.org/21/anime-1080-x-1080/My-Hero-Academia-Forum-Avatar-Profile-Photo-ID-92257-.png',
