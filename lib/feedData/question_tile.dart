@@ -55,24 +55,26 @@ class _QuestionTileState extends State<QuestionTile> {
                         .collection('answers');
                     var snapshots = await collection.get();
                     for (var e in snapshots.docs) {
+                      // print(e.data());
+                      // print(e.data()['uid']);
                       String answername;
-                      if (e.get('answer').length >= 1000) {
-                        answername = e.get('answer').substring(0, 1000);
+                      if (e.data()['answer'].length >= 1000) {
+                        answername = e.data()['answer'].substring(0, 1000);
                       } else {
-                        answername = e.get('answer');
+                        answername = e.data()['answer'];
                       }
                       answername = await answername.replaceAll("/", "_");
                       print(answername);
                       await FirebaseFirestore.instance
                           .collection('userData')
-                          .doc(e.get('uid'))
+                          .doc(e.data()['uid'])
                           .collection('userAnswers')
                           .doc(answername)
                           .delete();
                       int initialPosts = 1;
                       await FirebaseFirestore.instance
                           .collection('userData')
-                          .doc(e.get('uid'))
+                          .doc(e.data()['uid'])
                           .get()
                           .then((value) {
                         initialPosts = value.data()!['numberOfPosts'];
@@ -80,7 +82,7 @@ class _QuestionTileState extends State<QuestionTile> {
                       });
                       await FirebaseFirestore.instance
                           .collection('userData')
-                          .doc(e.get('uid'))
+                          .doc(e.data()['uid'])
                           .update({'numberOfPosts': initialPosts - 1});
                       await e.reference.delete();
                     }
