@@ -56,10 +56,12 @@ class _HomePageState extends State<HomePage> {
           backgroundColor: Colors.purple,
           onPressed: () {
             showModalBottomSheet(
-                context: context,
+              isScrollControlled: true,
+                          
+                context: context,                
                 builder: (context) {
                   return Container(
-                    padding: EdgeInsets.symmetric(vertical: 20, horizontal: 60),
+                    padding: EdgeInsets.fromLTRB(60, 20, 60, MediaQuery.of(context).viewInsets.bottom),
                     child: AskQuestion(),
                   );
                 });
