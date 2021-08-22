@@ -195,7 +195,7 @@ class _UserProfilePageState extends State<UserProfilePage> {
                                         SizedBox(
                                           height: heightOfScreen / 50,
                                         ),
-                                        Text(
+                                        /*Text(
                                           'Hostel',
                                           style: TextStyle(
                                               color: Colors.white, letterSpacing: 2.0),
@@ -210,7 +210,7 @@ class _UserProfilePageState extends State<UserProfilePage> {
                                             letterSpacing: 2.0,
                                             fontSize: 28,
                                           ),
-                                        ),
+                                        ),*/
                                         SizedBox(
                                           height: heightOfScreen / 50,
                                         ),
@@ -249,7 +249,7 @@ class _UserProfilePageState extends State<UserProfilePage> {
                                           children: [
                                             Icon(
                                               Icons.mail,
-                                              color: Colors.purple,
+                                              color: Colors.white,
                                             ),
                                             SizedBox(
                                               width: heightOfScreen / 50,

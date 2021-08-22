@@ -67,16 +67,22 @@ class _NavigationPageState extends State<NavigationPage> {
       bottomNavigationBar: BottomNavigationBar(
         onTap: _onItemTapped,
         currentIndex: _selectedIndex,
+        selectedItemColor: Colors.yellow,
+        selectedFontSize: 16,
+        selectedIconTheme: IconThemeData(
+          color: Colors.yellow,
+          size: 40
+        ),
         items: [
           BottomNavigationBarItem(
             icon: Icon(Icons.home,
-            color: Colors.white,),
+            /*color: Colors.white,*/),
             label: 'Home',
             //backgroundColor: Colors.blue,
           ),
           BottomNavigationBarItem(
               icon: Icon(Icons.account_box,
-              color: Colors.white,),
+              /*color: Colors.white,*/),
               label: 'Profile',
               //backgroundColor: Colors.blue
           ),
