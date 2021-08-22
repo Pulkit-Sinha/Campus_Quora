@@ -57,7 +57,7 @@ class _NavigationPageState extends State<NavigationPage> {
         controller: _pageController,
         children: _screens,
         onPageChanged: _onPageChanged,
-        physics: NeverScrollableScrollPhysics(),
+        //physics: NeverScrollableScrollPhysics(),
       ),
       // floatingActionButton: FloatingActionButton(
       //   onPressed: () {},

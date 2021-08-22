@@ -52,6 +52,7 @@ class _HomePageState extends State<HomePage> {
       value: DatabaseService(uid: user!.uid).questions,
       initialData: null,
       child: Scaffold(
+        backgroundColor: Colors.grey[900],
         floatingActionButton: FloatingActionButton(
           backgroundColor: Colors.purple,
           onPressed: () {
