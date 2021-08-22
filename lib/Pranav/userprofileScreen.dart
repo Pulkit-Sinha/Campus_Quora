@@ -66,7 +66,7 @@ class _UserProfilePageState extends State<UserProfilePage> {
               appBar: AppBar(
                 title: Text('User Profile'),
                 centerTitle: true,
-                backgroundColor: Colors.grey[850],
+                backgroundColor: Colors.purple,
                 actions: [
           TextButton(
             onPressed: () {
@@ -76,218 +76,224 @@ class _UserProfilePageState extends State<UserProfilePage> {
               children: [
                 Icon(
                   Icons.logout,
-                  //color: Colors.black,
+                  color: Colors.yellow,
                 ),
                 SizedBox(
                   width: 4,
                 ),
                 Text(
                   'Logout',
-                  //style: TextStyle(color: Colors.black),
+                  style: TextStyle(color: Colors.yellow),
                 ),
               ],
             ),
           )]
               ),
-              body: Padding(
-                padding: EdgeInsets.fromLTRB(20.0, 30, 20, 0),
+              body: SingleChildScrollView(
                 child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Center(
-                      child: ClipOval(
-                        child: Image.network(
-                          currentUser.profilePic,
-                          height: 110,
-                          width: 110,
-                          fit: BoxFit.fitHeight,
-                        ),
-                      ),
-                    ),
-                    SizedBox(
-                      height: heightOfScreen / 50,
-                    ),
-                    Container(
+                    Padding(
+                      padding: EdgeInsets.fromLTRB(20.0, 30, 20, 0),
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          Container(
-                            child: ElevatedButton(
-                                style: ElevatedButton.styleFrom(
-                                    primary: Colors.grey[800]),
-                                onPressed: () {
-                                  Navigator.pushNamed(
-                                      context, '/userAnswerList',
-                                      arguments: widget.useruid);
-                                },
-                                child: Text(
-                                  'Posts: ${currentUser.numberOfPosts}',
-                                  style: TextStyle(
-                                      color: Colors.amberAccent, fontSize: 18),
-                                )),
-                            width: double.infinity,
-                          ),
-                          Divider(
-                            height: 60,
-                            color: Colors.grey[800],
-                          ),
-                          Container(
-                            height: heightOfScreen * (0.4),
-                            child: SingleChildScrollView(
-                              child: Column(
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: [
-                                  Text(
-                                    'NAME',
-                                    style: TextStyle(
-                                        color: Colors.grey, letterSpacing: 2.0),
-                                  ),
-                                  SizedBox(
-                                    height: heightOfScreen / 50,
-                                  ),
-                                  Text(
-                                    ('${currentUser.firstname} ${currentUser.secondname}'),
-                                    style: TextStyle(
-                                      color: Colors.amberAccent,
-                                      letterSpacing: 2.0,
-                                      fontSize: 28,
-                                    ),
-                                  ),
-                                  SizedBox(height: heightOfScreen / 50),
-                                  Text(
-                                    'Graduation Year',
-                                    style: TextStyle(
-                                        color: Colors.grey, letterSpacing: 2.0),
-                                  ),
-                                  SizedBox(
-                                    height: heightOfScreen / 50,
-                                  ),
-                                  Text(
-                                    '${currentUser.graduationYear}',
-                                    style: TextStyle(
-                                      color: Colors.amberAccent,
-                                      letterSpacing: 2.0,
-                                      fontSize: 28,
-                                    ),
-                                  ),
-                                  SizedBox(
-                                    height: heightOfScreen / 50,
-                                  ),
-                                  Text(
-                                    'Degree',
-                                    style: TextStyle(
-                                        color: Colors.grey, letterSpacing: 2.0),
-                                  ),
-                                  SizedBox(
-                                    height: heightOfScreen / 50,
-                                  ),
-                                  Text(
-                                    '${currentUser.degreeIn}',
-                                    style: TextStyle(
-                                      color: Colors.amberAccent,
-                                      letterSpacing: 2.0,
-                                      fontSize: 28,
-                                    ),
-                                  ),
-                                  SizedBox(
-                                    height: heightOfScreen / 50,
-                                  ),
-                                  Text(
-                                    'Hostel',
-                                    style: TextStyle(
-                                        color: Colors.grey, letterSpacing: 2.0),
-                                  ),
-                                  SizedBox(
-                                    height: heightOfScreen / 50,
-                                  ),
-                                  Text(
-                                    '${currentUser.hostelName}',
-                                    style: TextStyle(
-                                      color: Colors.amberAccent,
-                                      letterSpacing: 2.0,
-                                      fontSize: 28,
-                                    ),
-                                  ),
-                                  SizedBox(
-                                    height: heightOfScreen / 50,
-                                  ),
-                                  Text(
-                                    'About Me',
-                                    style: TextStyle(
-                                        color: Colors.grey, letterSpacing: 2.0),
-                                  ),
-                                  SizedBox(
-                                    height: heightOfScreen / 50,
-                                  ),
-                                  Text(
-                                    '${currentUser.aboutMe}',
-                                    style: TextStyle(
-                                      color: Colors.amberAccent,
-                                      letterSpacing: 2.0,
-                                      fontSize: 18,
-                                    ),
-                                  ),
-                                  SizedBox(
-                                    height: heightOfScreen / 50,
-                                  ),
-                                  Divider(
-                                    height: 60,
-                                    color: Colors.grey[800],
-                                  ),
-                                  Center(
-                                    child: Text(
-                                      'Contact',
-                                      style: TextStyle(
-                                          color: Colors.grey,
-                                          letterSpacing: 2.0),
-                                    ),
-                                  ),
-                                  Row(
-                                    children: [
-                                      Icon(
-                                        Icons.mail,
-                                        color: Colors.grey,
-                                      ),
-                                      SizedBox(
-                                        width: heightOfScreen / 50,
-                                      ),
-                                      Text(
-                                        currentUser.emailId,
-                                        style: TextStyle(
-                                          color: Colors.grey[500],
-                                          fontSize: 18,
-                                          letterSpacing: 1,
-                                        ),
-                                      )
-                                    ],
-                                  ),
-                                  SizedBox(
-                                    height: heightOfScreen / 100,
-                                  ),
-                                  Row(
-                                    children: [
-                                      FaIcon(
-                                        FontAwesomeIcons.whatsapp,
-                                        color: Colors.grey,
-                                      ),
-                                      SizedBox(
-                                        width: heightOfScreen / 50,
-                                      ),
-                                      Text(
-                                        currentUser.whatsappNumber,
-                                        style: TextStyle(
-                                          color: Colors.grey[500],
-                                          fontSize: 18,
-                                          letterSpacing: 1,
-                                        ),
-                                      )
-                                    ],
-                                  ),
-                                  SizedBox(
-                                    height: heightOfScreen / 50,
-                                  )
-                                ],
+                          Center(
+                            child: ClipOval(
+                              child: Image.network(
+                                currentUser.profilePic,
+                                height: 110,
+                                width: 110,
+                                fit: BoxFit.fitHeight,
                               ),
+                            ),
+                          ),
+                          SizedBox(
+                            height: heightOfScreen / 50,
+                          ),
+                          Container(
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Container(
+                                  child: ElevatedButton(
+                                      style: ElevatedButton.styleFrom(
+                                          primary: Colors.purple),
+                                      onPressed: () {
+                                        Navigator.pushNamed(
+                                            context, '/userAnswerList',
+                                            arguments: widget.useruid);
+                                      },
+                                      child: Text(
+                                        'Posts: ${currentUser.numberOfPosts}',
+                                        style: TextStyle(
+                                            color: Colors.white, fontSize: 18),
+                                      )),
+                                  width: double.infinity,
+                                ),
+                                Divider(
+                                  height: 60,
+                                  color: Colors.grey[800],
+                                ),
+                                Container(
+                                  height: heightOfScreen * (0.4),
+                                  child: SingleChildScrollView(
+                                    child: Column(
+                                      crossAxisAlignment: CrossAxisAlignment.start,
+                                      children: [
+                                        Text(
+                                          'Name',
+                                          style: TextStyle(
+                                              color: Colors.white, letterSpacing: 2.0),
+                                        ),
+                                        SizedBox(
+                                          height: heightOfScreen / 50,
+                                        ),
+                                        Text(
+                                          ('${currentUser.firstname} ${currentUser.secondname}'),
+                                          style: TextStyle(
+                                            color: Colors.purple,
+                                            letterSpacing: 2.0,
+                                            fontSize: 28,
+                                          ),
+                                        ),
+                                        SizedBox(height: heightOfScreen / 50),
+                                        Text(
+                                          'Graduation Year',
+                                          style: TextStyle(
+                                              color: Colors.white, letterSpacing: 2.0),
+                                        ),
+                                        SizedBox(
+                                          height: heightOfScreen / 50,
+                                        ),
+                                        Text(
+                                          '${currentUser.graduationYear}',
+                                          style: TextStyle(
+                                            color: Colors.purple,
+                                            letterSpacing: 2.0,
+                                            fontSize: 28,
+                                          ),
+                                        ),
+                                        SizedBox(
+                                          height: heightOfScreen / 50,
+                                        ),
+                                        Text(
+                                          'Degree',
+                                          style: TextStyle(
+                                              color: Colors.white, letterSpacing: 2.0),
+                                        ),
+                                        SizedBox(
+                                          height: heightOfScreen / 50,
+                                        ),
+                                        Text(
+                                          '${currentUser.degreeIn}',
+                                          style: TextStyle(
+                                            color: Colors.purple,
+                                            letterSpacing: 2.0,
+                                            fontSize: 28,
+                                          ),
+                                        ),
+                                        SizedBox(
+                                          height: heightOfScreen / 50,
+                                        ),
+                                        Text(
+                                          'Hostel',
+                                          style: TextStyle(
+                                              color: Colors.white, letterSpacing: 2.0),
+                                        ),
+                                        SizedBox(
+                                          height: heightOfScreen / 50,
+                                        ),
+                                        Text(
+                                          '${currentUser.hostelName}',
+                                          style: TextStyle(
+                                            color: Colors.purple,
+                                            letterSpacing: 2.0,
+                                            fontSize: 28,
+                                          ),
+                                        ),
+                                        SizedBox(
+                                          height: heightOfScreen / 50,
+                                        ),
+                                        Text(
+                                          'About Me',
+                                          style: TextStyle(
+                                              color: Colors.white, letterSpacing: 2.0),
+                                        ),
+                                        SizedBox(
+                                          height: heightOfScreen / 50,
+                                        ),
+                                        Text(
+                                          '${currentUser.aboutMe}',
+                                          style: TextStyle(
+                                            color: Colors.purple,
+                                            letterSpacing: 2.0,
+                                            fontSize: 18,
+                                          ),
+                                        ),
+                                        SizedBox(
+                                          height: heightOfScreen / 50,
+                                        ),
+                                        Divider(
+                                          height: 60,
+                                          color: Colors.grey[800],
+                                        ),
+                                        Center(
+                                          child: Text(
+                                            'Contact',
+                                            style: TextStyle(
+                                                color: Colors.white,
+                                                letterSpacing: 2.0),
+                                          ),
+                                        ),
+                                        Row(
+                                          children: [
+                                            Icon(
+                                              Icons.mail,
+                                              color: Colors.purple,
+                                            ),
+                                            SizedBox(
+                                              width: heightOfScreen / 50,
+                                            ),
+                                            Text(
+                                              currentUser.emailId,
+                                              style: TextStyle(
+                                                color: Colors.purple,
+                                                fontSize: 18,
+                                                letterSpacing: 1,
+                                              ),
+                                            )
+                                          ],
+                                        ),
+                                        SizedBox(
+                                          height: heightOfScreen / 100,
+                                        ),
+                                        Row(
+                                          children: [
+                                            FaIcon(
+                                              FontAwesomeIcons.whatsapp,
+                                              color: Colors.white,
+                                            ),
+                                            SizedBox(
+                                              width: heightOfScreen / 50,
+                                            ),
+                                            Text(
+                                              currentUser.whatsappNumber,
+                                              style: TextStyle(
+                                                color: Colors.purple,
+                                                fontSize: 18,
+                                                letterSpacing: 1,
+                                              ),
+                                            )
+                                          ],
+                                        ),
+                                        SizedBox(
+                                          height: heightOfScreen / 50,
+                                        )
+                                      ],
+                                    ),
+                                  ),
+                                ),
+                              ],
                             ),
                           ),
                         ],

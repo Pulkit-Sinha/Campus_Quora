@@ -69,14 +69,17 @@ class _NavigationPageState extends State<NavigationPage> {
         currentIndex: _selectedIndex,
         items: [
           BottomNavigationBarItem(
-            icon: Icon(Icons.home),
+            icon: Icon(Icons.home,
+            color: Colors.white,),
             label: 'Home',
-            backgroundColor: Colors.blue,
+            //backgroundColor: Colors.blue,
           ),
           BottomNavigationBarItem(
-              icon: Icon(Icons.account_box),
+              icon: Icon(Icons.account_box,
+              color: Colors.white,),
               label: 'Profile',
-              backgroundColor: Colors.blue),
+              //backgroundColor: Colors.blue
+          ),
           // BottomNavigationBarItem(
           //   icon: Icon(Icons.circle_notifications_rounded),
           //   label: "Notifications",
@@ -89,7 +92,7 @@ class _NavigationPageState extends State<NavigationPage> {
           // ),
         ],
 
-        // backgroundColor: Colors.black,
+         backgroundColor: Colors.purple,
       ),
     );
   }
