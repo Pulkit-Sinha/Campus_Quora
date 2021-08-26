@@ -7,6 +7,7 @@ import 'package:log_in/Services/database.dart';
 import 'package:log_in/authenticate/authenticate.dart';
 import 'package:log_in/authenticate/register.dart';
 import 'package:provider/provider.dart';
+import 'package:shimmer/shimmer.dart';
 
 class MakeAccount extends StatefulWidget {
   @override
@@ -26,7 +27,7 @@ class _MakeAccountState extends State<MakeAccount> {
   String degreeIn = '';
   String hostelName = '';
   String aboutMe = '';
-  String whatsappNumber = '';
+  String whatsappNumber = 'not provided';
   String instagramId = '';
   String profilePic =
       'https://t4.ftcdn.net/jpg/02/15/84/43/360_F_215844325_ttX9YiIIyeaR7Ne6EaLLjMAmy4GvPC69.jpg';
@@ -76,6 +77,28 @@ class _MakeAccountState extends State<MakeAccount> {
             key: _formKey,
             child: Column(
               children: [
+                Column(
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: [
+                    Shimmer.fromColors(
+                      baseColor: Colors.white,
+                      highlightColor: Colors.black,
+                      period: Duration(seconds: 4),
+                      child: Text(
+                        'Welcome to QBits!',
+                        textAlign: TextAlign.center,
+                        style: TextStyle(fontSize: 28),
+                      ),
+                    ),
+                    Text(
+                      'A platform to answer all BITS Queries',
+                      textAlign: TextAlign.center,
+                      style: TextStyle(fontSize: 18),
+                    )
+                    
+                    
+                  ],
+                ),
                 SizedBox(height: 30),
                 ClipOval(
                   child: Image.network(
@@ -86,16 +109,22 @@ class _MakeAccountState extends State<MakeAccount> {
                   ),
                 ),
                 SizedBox(height: 10),
-                Text('Add image',
-                style: TextStyle(
-                  fontSize: 18
-                ),),
+                Text(
+                  'Select Avatar',
+                  style: TextStyle(fontSize: 18),
+                ),
                 SizedBox(
                   height: 10,
                 ),
                 Container(
                   width: 250,
                   child: DropdownButtonFormField(
+                    onTap: () {
+                      FocusScopeNode currentFocus = FocusScope.of(context);
+                      if (!currentFocus.hasPrimaryFocus) {
+                        currentFocus.unfocus();
+                      }
+                    },
                     value: imageList[0],
                     hint: Text('Choose an image as avatar'),
                     icon: const Icon(Icons.arrow_downward),
@@ -130,9 +159,7 @@ class _MakeAccountState extends State<MakeAccount> {
                   width: double.infinity,
                   child: Text(
                     'Name',
-                      style: TextStyle(
-                      fontSize: 18
-                  ),
+                    style: TextStyle(fontSize: 18),
                     textAlign: TextAlign.left,
                   ),
                 ),
@@ -159,8 +186,6 @@ class _MakeAccountState extends State<MakeAccount> {
                       fit: FlexFit.tight,
                       flex: 1,
                       child: TextFormField(
-                        validator: (val) =>
-                            val!.isEmpty ? 'second name cannot be empty' : null,
                         onChanged: (val) {
                           setState(() {
                             secondname = val;
@@ -178,15 +203,13 @@ class _MakeAccountState extends State<MakeAccount> {
                   width: double.infinity,
                   child: Text(
                     'BITS ID',
-                    style: TextStyle(
-                        fontSize: 18
-                    ),
+                    style: TextStyle(fontSize: 18),
                     textAlign: TextAlign.left,
                   ),
                 ),
                 TextFormField(
                     validator: (val) =>
-                        val!.isEmpty ? 'Enter BitsId in 20xxAxxxxxP' : null,
+                        val!.isEmpty ? 'Enter BitsId in 20xxxxxxxxP' : null,
                     onChanged: (val) {
                       setState(() {
                         BitsId = val;
@@ -197,16 +220,22 @@ class _MakeAccountState extends State<MakeAccount> {
                   width: double.infinity,
                   child: Text(
                     'Degree',
-                    style: TextStyle(
-                        fontSize: 18
-                    ),
+                    style: TextStyle(fontSize: 18),
                     textAlign: TextAlign.left,
                   ),
                 ),
                 Container(
                   width: double.infinity,
                   child: DropdownButtonFormField(
-                    value: dropdowndegreeValue,
+                    validator: (val) =>
+                        val == null ? "Please mention your degree" : null,
+                    onTap: () {
+                      FocusScopeNode currentFocus = FocusScope.of(context);
+                      if (!currentFocus.hasPrimaryFocus) {
+                        currentFocus.unfocus();
+                      }
+                    },
+                    hint: Text("type of degree"),
                     icon: const Icon(Icons.arrow_downward),
                     iconSize: 24,
                     isExpanded: true,
@@ -222,12 +251,8 @@ class _MakeAccountState extends State<MakeAccount> {
                         //degreeIn = newValue;
                       });
                     },
-                    items: [
-                      'Type of Degree',
-                      'First Degree',
-                      'Higher Degree',
-                      'PhD'
-                    ].map<DropdownMenuItem<String>>((String value) {
+                    items: ['First Degree', 'Higher Degree', 'PhD']
+                        .map<DropdownMenuItem<String>>((String value) {
                       return DropdownMenuItem<String>(
                         value: value,
                         child: Text(value),
@@ -240,16 +265,14 @@ class _MakeAccountState extends State<MakeAccount> {
                   width: double.infinity,
                   child: Text(
                     'Gender',
-                    style: TextStyle(
-                        fontSize: 18
-                    ),
+                    style: TextStyle(fontSize: 18),
                     textAlign: TextAlign.left,
                   ),
                 ),
                 Container(
                   width: double.infinity,
                   child: DropdownButton(
-                    value: dropdowngenderValue,
+                    hint: Text("Gender"),
                     icon: const Icon(Icons.arrow_downward),
                     iconSize: 24,
                     isExpanded: true,
@@ -260,7 +283,7 @@ class _MakeAccountState extends State<MakeAccount> {
                         dropdowngenderValue = newValue!;
                       });
                     },
-                    items: ['Gender', 'Male', 'Female', 'Other']
+                    items: ['Male', 'Female', 'Other']
                         .map<DropdownMenuItem<String>>((String value) {
                       return DropdownMenuItem<String>(
                         value: value,
@@ -274,16 +297,22 @@ class _MakeAccountState extends State<MakeAccount> {
                   width: double.infinity,
                   child: Text(
                     'Branch',
-                    style: TextStyle(
-                        fontSize: 18
-                    ),
+                    style: TextStyle(fontSize: 18),
                     textAlign: TextAlign.left,
                   ),
                 ),
                 Container(
                   width: double.infinity,
                   child: DropdownButtonFormField(
-                    value: dropdownbranchValue,
+                    validator: (val) =>
+                        val == null ? "Please mention your branch" : null,
+                    onTap: () {
+                      FocusScopeNode currentFocus = FocusScope.of(context);
+                      if (!currentFocus.hasPrimaryFocus) {
+                        currentFocus.unfocus();
+                      }
+                    },
+                    hint: Text("Branch"),
                     icon: const Icon(Icons.arrow_downward),
                     iconSize: 24,
                     isExpanded: true,
@@ -300,11 +329,13 @@ class _MakeAccountState extends State<MakeAccount> {
                       });
                     },
                     items: [
-                      'Branch',
                       'CSE',
                       'EEE',
-                      'ME',
-                      'Chem.',
+                      'ENI',
+                      'Mechanical',
+                      'Manufacturing',
+                      'ECE',
+                      'Chemical',
                       'Civil',
                       'B.Pharm'
                     ].map<DropdownMenuItem<String>>((String value) {
@@ -320,9 +351,7 @@ class _MakeAccountState extends State<MakeAccount> {
                   width: double.infinity,
                   child: Text(
                     'Contact Number',
-                    style: TextStyle(
-                        fontSize: 18
-                    ),
+                    style: TextStyle(fontSize: 18),
                     textAlign: TextAlign.left,
                   ),
                 ),
@@ -330,17 +359,13 @@ class _MakeAccountState extends State<MakeAccount> {
                   onChanged: (val) {
                     whatsappNumber = val;
                   },
-                  validator: (val) =>
-                      val!.isEmpty ? 'Please enter a contact number' : null,
                 ),
                 SizedBox(height: 10),
                 Container(
                   width: double.infinity,
                   child: Text(
                     'Email',
-                    style: TextStyle(
-                        fontSize: 18
-                    ),
+                    style: TextStyle(fontSize: 18),
                     textAlign: TextAlign.left,
                   ),
                 ),
@@ -355,9 +380,7 @@ class _MakeAccountState extends State<MakeAccount> {
                   width: double.infinity,
                   child: Text(
                     'About Me',
-                    style: TextStyle(
-                        fontSize: 18
-                    ),
+                    style: TextStyle(fontSize: 18),
                     textAlign: TextAlign.left,
                   ),
                 ),
@@ -374,9 +397,7 @@ class _MakeAccountState extends State<MakeAccount> {
                   width: double.infinity,
                   child: Text(
                     'Graduation Year',
-                    style: TextStyle(
-                        fontSize: 18
-                    ),
+                    style: TextStyle(fontSize: 18),
                     textAlign: TextAlign.left,
                   ),
                 ),

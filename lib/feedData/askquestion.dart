@@ -51,6 +51,12 @@ class _AskQuestionState extends State<AskQuestion> {
                   height: 20,
                 ),
                 DropdownButtonFormField(
+                  onTap: () {
+                        FocusScopeNode currentFocus = FocusScope.of(context);
+                        if (!currentFocus.hasPrimaryFocus) {
+                          currentFocus.unfocus();
+                        }
+                      },
                   // value: [],
                   icon: const Icon(Icons.arrow_downward),
                   iconSize: 24,
@@ -70,7 +76,7 @@ class _AskQuestionState extends State<AskQuestion> {
                       //degreeIn = newValue;
                     });
                   },
-                  items: ['Food', 'Admission', 'Culture', 'General', 'Academics']
+                  items: ['Food', 'Admission', 'Culture', 'General', 'Academics','Miscellaneous']
                       .map<DropdownMenuItem<String>>((String value) {
                     return DropdownMenuItem<String>(
                       value: value,

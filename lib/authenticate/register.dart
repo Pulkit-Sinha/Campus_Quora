@@ -28,7 +28,7 @@ class _RegisterState extends State<Register> {
             appBar: AppBar(
               elevation: 0,
               centerTitle: true,
-              title: Text('Sign up'),
+              title: Text('Sign up to QBits'),
               // actions: [
               //   TextButton(
               //     onPressed: () {

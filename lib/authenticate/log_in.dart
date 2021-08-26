@@ -34,7 +34,7 @@ class _LogInPageState extends State<LogInPage> {
     return loading == true
         ? Loading()
         : Scaffold(
-          appBar: AppBar(title: Text('Log In'),centerTitle: true,),
+          appBar: AppBar(title: Text('Log In to QBits'),centerTitle: true,),
             backgroundColor: Colors.grey[850],
             body: SingleChildScrollView(
               child: Container(

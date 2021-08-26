@@ -138,6 +138,7 @@ class _HomePageState extends State<HomePage> {
                   'Culture',
                   'General',
                   'Academics',
+                  'Miscellaneous',
                   'Remove Filter',
                 ].map<DropdownMenuItem<String>>((String value) {
                   return DropdownMenuItem<String>(

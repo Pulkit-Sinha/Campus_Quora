@@ -71,7 +71,7 @@ class _NavigationPageState extends State<NavigationPage> {
         selectedFontSize: 16,
         selectedIconTheme: IconThemeData(
           color: Colors.yellow,
-          size: 40
+          size: 30
         ),
         items: [
           BottomNavigationBarItem(
